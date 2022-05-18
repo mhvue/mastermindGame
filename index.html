@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mastermind Game</title>
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!---stylesheet-->
     <link rel="stylesheet" href="./styles/style.css">
     <!--jQuery-->
@@ -12,28 +14,42 @@
 
 </head>
 <body>
-    <h1>Mastermind Game</h1>
-    <!--intro-->
-    <h3>Welcome! This game is to guess the numbers.</h3>
-    <!--Rules here-->
-    <ul>
-        <li>It is a 4 number combination from 0-7. (ex: 1234,4567,6765 ..etc) *duplicate numbers may exist*</li>
-        <li>You get 10 attempts to guess the 4 number combination </li>
-        <li>Number needs to be in correct placement. </li>
-        <li>If you guess the corret numbers, but wrong placment, you will be informed of so
-             (ex: if numbers should be 1234 but you input 1324, that's incorrect)</li>
-        <li>You can view your past guesses and feedback on your right hand side</li>
-    </ul>
+    <div class="container">
+        <div class="row"> 
+            <div class="col"><h1>Mastermind Game</h1></div>
+        </div>
+   
+    <div class="row">
+        <div class="col">
+            <!--intro-->
+            <h3>Welcome! This game is to guess the numbers.</h3>
+            <!--Rules here-->
+            <ul>
+                <li>It is a 4 number combination from 0-7. (ex: 1234,4567,6765 ..etc) *duplicate numbers may exist*</li>
+                <li>You get 10 attempts to guess the 4 number combination </li>
+                <li>Number needs to be in correct placement. </li>
+                <li>If you guess the corret numbers, but wrong placment, you will be informed of so
+                    (ex: if numbers should be 1234 but you input 1324, that's incorrect)</li>
+                <li>You can view your past guesses and feedback on your right hand side</li>
+            </ul>
 
-    <!--number of attempts here-->
-    <h2>Your Remaining Attempts:<span>10</span></h2>
+            <!--number of attempts here-->
+            <h2>Your Remaining Attempts:<span>10</span></h2>
 
-    <!--combonation of numbers here-->
-    <div>
-        <span>numbers input by user will go here</span>
+            <!--combonation of numbers here-->
+            <div>
+                <span>numbers input by user will go here</span>
+            </div>
+        </div>
+
+        <div class="col">view history of guesses and feed here</div>
     </div>
-
+</div>
+    
     <!--js-->
     <script src="./scripts/script.js"></script>
+    <!---Bootstrap JS CDN--> 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>
