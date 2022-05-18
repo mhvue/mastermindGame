@@ -20,37 +20,38 @@
             <div class="col"><h1>Mastermind Game</h1></div>
         </div>
    
-    <!--this row splits in half, 1 containing info, the 2nd the guesses and feedback-->
-    <div class="row">
-        <div class="col">
-            <!--intro-->
-            <h3>Welcome! This game is to guess the numbers.</h3>
-            <!--Rules here-->
-            <ul>
-                <li>It is a 4 number combination from 0-7. (ex: 1234,4567,6765 ..etc) *duplicate numbers may exist*</li>
-                <li>You get 10 attempts to guess the 4 number combination </li>
-                <li>Number needs to be in correct placement. </li>
-                <li>If you guess the corret numbers, but wrong placment, you will be informed of so
-                    (ex: if numbers should be 1234 but you input 1324, that's incorrect)</li>
-                <li>You can view your past guesses and feedback on your right hand side</li>
-            </ul>
-        </div>
+        <!--this row splits in half, 1 containing info, the 2nd the guesses and feedback-->
+        <div class="row">
+            <div class="col">
+                <!--intro-->
+                <h3>Welcome! This game is to guess the numbers.</h3>
+                <!--Rules here-->
+                <ul>
+                    <li>It is a 4 number combination from 0-7. (ex: 1234,4567,6765 ..etc) *duplicate numbers may exist*</li>
+                    <li>You get 10 attempts to guess the 4 number combination </li>
+                    <li>Number needs to be in correct placement. </li>
+                    <li>If you guess the corret numbers, but wrong placment, you will be informed of so
+                        (ex: if numbers should be 1234 but you input 1324, that's incorrect)</li>
+                    <li>You can view your past guesses and feedback on your right hand side</li>
+                </ul>
+            </div>
             <div class="col">
                 <h3>Your Past Guesses</h3>
                 <p>Check out our past guesses here along with feedback of those</p>
             </div>
 
-        <!--this row contains the attemps and guesses by user-->
+            <!--this row contains the attemps and guesses by user-->
             <div class="row">
                 <div class="col">
                 <!--number of attempts here-->
                     <h3 class="text-center remaining-info">Your Remaining Attempts: <span>10</span></h3>
                 <!--combonation of numbers here-->
-                    <p class="text-center">Numbers input by user will go here</span>
+                    <form>
+                        <input class="numHolder" id="target" type="text" value="number here">
+                        <button>Submit</button>
+                    </form>
                 </div>
             </div>
-
-            
         </div>
     </div>
 </div>
