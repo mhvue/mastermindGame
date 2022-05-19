@@ -1,5 +1,6 @@
 let enteredNum = [];
 let newNum = [];
+let count = 10;
 
 //api here. get the generated numbers and put into generatedNum array.
 $.ajax({
@@ -24,19 +25,46 @@ $(".numHolder").keydown(function(event){
 //this is what happens next as user presses submit button 
 $("#submitBtn").click(function(event){
     event.preventDefault();
+    let checker = [];
+    let triedNum = [];
+
+      //attempts going down (which should go down for incorrect answers)
+      count--;
+      console.log(count)
+      $("span").text(count)
+
 
     //compared enteredNum values to genreatedNum values 
     for(let i = 0; i < enteredNum.length; i++){        
 
-        // console.log(enteredNum[i] === newNum[i])
-        if(enteredNum[i] === newNum[i]){
-            console.log("hello")
+       //guessed correct numbers but wrong location/placment of numbers
+
+       //guest correct number and its location
+       if(enteredNum[i] === newNum[i]){
+           //check value and check index of each array
+           checker.push(enteredNum[i])
+        console.log(checker)
+           if(checker.length === newNum.length){
+            console.log("congrats match!")
+           }
+           
         }
+         //incorrect numbers 
         else{
-            console.log("not here")
+           // triedNum.push(enteredNum[i]) --keep history of numbers tried
+            console.log(enteredNum[i])
+            console.log("sorry no match")
+            checker = [];
+            console.log(checker)
+            if(i === enteredNum.length-1) {
+                enteredNum = []
+                console.log(enteredNum)
+            }
         }
+      
     }
 
+         
 });
 
 
