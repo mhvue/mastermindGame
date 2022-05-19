@@ -36,10 +36,10 @@
                 </ul>
             </div>
             <div class="col">
-                <h3>Your Past Guesses</h3>
-                <p>Check out our past guesses here along with feedback of those</p>
                 <div>
-                    <p class="history">Your Guess: <p class="historyHolder"></p></p>
+                    <h4>Your Guesses:</h4>
+                    <ul class="historyHolder">
+                    </ul>
                 </div>
             </div>
 
@@ -49,8 +49,9 @@
                 <!--number of attempts here-->
                     <h3 class="text-center remaining-info">Your Remaining Attempts: <span id="guess-num">10</span></h3>
                 <!--combonation of numbers here-->
-                    <form>
-                        <input class="numHolder" id="target" type="text" value="number here">
+                <!-- need validation, character limit, pressing enter to submit -->
+                    <form> 
+                        <input class="numHolder" id="target" type="text" placeholder="number here">
                         <button id="submitBtn">Submit</button>
                     </form>
                 </div>

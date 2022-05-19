@@ -16,12 +16,6 @@ $.ajax({
     console.log(newNum)
 });
 
-//get the number from user and and to enteredNumArr
-$(".numHolder").keydown(function(event){
-    enteredNum.push(event.key) //numbers entered are strings
-    console.log("I entered " + enteredNum)
-});
-
 function countDown() {
     count--;
     console.log("count is now " + count)
@@ -31,54 +25,79 @@ function countDown() {
 //this is what happens next as user presses submit button 
 $("#submitBtn").click(function(event){
     event.preventDefault();
-    let checker = [];
-    let incorrectArr= []; //do want to display this 
+     let checker = [];
+    let incorrectArr= []; //do want to display cd this 
 
+    //get the number from user and and to enteredNumArr ---side note: possibly put in function
+    const userNum= $(".numHolder").val().trim();
+    console.log(userNum)
+    enteredNum.push(userNum)
+    const splitUserNum = enteredNum.join().split("")
+    console.log(splitUserNum)
     //compared enteredNum values to genreatedNum values 
-    for(let i = 0; i < enteredNum.length; i++){        
+    for(let i = 0; i < splitUserNum.length; i++){        
 
        //guest correct number and its location
-       if(enteredNum[i] === newNum[i]){
+       if(splitUserNum[i] === newNum[i]){
            //check value and check index of each array
-           checker.push(enteredNum[i])
+          checker.push(splitUserNum[i])
+           console.log("checker", checker, checker[i], i)
             //console.log(enteredNum)
             if(checker.length === 4) {
-            console.log("congrats match!");
+            alert("congrats match!");
             enteredNum.length = 0;
+
+            $(".historyHolder").html("")
            }
         }
 
         else {
             //push the non matched numbers 
-            incorrectArr.push(enteredNum[i])
+            incorrectArr.push(splitUserNum[i])
             console.log("incorr ", incorrectArr)
-            checker.length = 0
          
             if(i === enteredNum.length-1) {
                 enteredNum.length = 0;
             }
+
+
           }
-        }
-       
+
+
+    }
+    
 //messages to user
     if(incorrectArr.length === 4){
         const userMsg = "sorry no match at all";
-        incorrectArr.forEach((n)=> {
-            $(".historyHolder").append(n)
-        })
-        //get msg to pop up first 
+        const historyList= "<li class='historyItem'><span>"
+        const incorrectVal = incorrectArr.join("");
+
+        //get msg to pop up first then append user's guessed number with feedback
         alert(userMsg)
-        //then append
+        $(".historyHolder").append(`${historyList + incorrectVal + "</span></li>"}`)
         $(".historyHolder").append(` feedback: ${userMsg}`)
+        incorrectArr = []
+        enteredNum.length = 0;
         countDown();
+
    }
     else if(checker.length <= 3){
         const userMsg = "almost";
-        //get msg to pop up first 
+        const historyList= "<li class='historyItem'><span>"
+        const almostVal = splitUserNum.join("");
+
+        //look at checker length to provide some kind of hint 
+        if(checker.length >= 2){
+            alert('so close! You are getting closer! but which number?!)')
+        }
+        //get msg to pop up first then append user's guessed number with feedback
         alert(userMsg)
-        //then append
-        $(".historyHolder").append(userMsg)
+        $(".historyHolder").append(`${historyList + almostVal + "</span></li>"}`)
+        $(".historyHolder").append(` feedback: ${userMsg}`)
+        checker = []
+        enteredNum.length = 0;
         countDown();
+     
    }
 });
 
