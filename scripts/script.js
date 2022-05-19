@@ -19,52 +19,63 @@ $.ajax({
 //get the number from user and and to enteredNumArr
 $(".numHolder").keydown(function(event){
     enteredNum.push(event.key) //numbers entered are strings
-    console.log(enteredNum)
+    console.log("I entered " + enteredNum)
 });
+
+function countDown() {
+    count--;
+    console.log("count is now " + count)
+    $("span").text(count)
+}
 
 //this is what happens next as user presses submit button 
 $("#submitBtn").click(function(event){
     event.preventDefault();
     let checker = [];
-    let triedNum = [];
+    let incorrectArr= []; //do want to display this 
 
-      //attempts going down (which should go down for incorrect answers)
-      count--;
-      console.log(count)
-      $("span").text(count)
-
+    
 
     //compared enteredNum values to genreatedNum values 
     for(let i = 0; i < enteredNum.length; i++){        
 
-       //guessed correct numbers but wrong location/placment of numbers
+       //guessed correct numbers 
 
        //guest correct number and its location
        if(enteredNum[i] === newNum[i]){
            //check value and check index of each array
            checker.push(enteredNum[i])
-        console.log(checker)
-           if(checker.length === newNum.length){
-            console.log("congrats match!")
+            //console.log(enteredNum)
+            if(checker.length === 4) {
+            console.log("congrats match!");
+            enteredNum.length = 0;
            }
-           
         }
-         //incorrect numbers 
-        else{
-           // triedNum.push(enteredNum[i]) --keep history of numbers tried
-            console.log(enteredNum[i])
-            console.log("sorry no match")
-            checker = [];
-            console.log(checker)
-            if(i === enteredNum.length-1) {
-                enteredNum = []
-                console.log(enteredNum)
-            }
-        }
-      
-    }
 
+        else {
+            //push the non match numbers here 
+            incorrectArr.push(enteredNum[i])
+            // triedNum.push(enteredNum[i]) --keep history of numbers tried
+            console.log("incorr ", incorrectArr)
+                  // console.log("sorry no match")
+            checker.length = 0
          
+            if(i === enteredNum.length-1) {
+                enteredNum.length = 0;
+            }
+          }
+        }
+       
+//messages to user
+    if(incorrectArr.length === 4){
+        console.log("sorry no match at all")
+        countDown();
+   }
+    else if(checker.length <= 3){
+        console.log("checker", checker)
+        console.log("almost")
+        countDown();
+   }
 });
 
 
