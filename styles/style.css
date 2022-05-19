@@ -15,8 +15,9 @@ h1{
     text-align: center;
     margin-bottom: 5%;
 }
-.text-center, form {
+.text-center, form, .messageContainer, .modal-title{
     text-align: center;
 }
+
 
 

@@ -51,19 +51,36 @@
                 <!--combonation of numbers here-->
                 <!-- need validation, character limit, pressing enter to submit -->
                     <form> 
-                        <input class="numHolder" id="target" type="text" placeholder="number here">
+                        <input class="numHolder" type="text" id="target" type="text" placeholder="number here" pattern="/^[0-7]+$/{4}">
                         <button id="submitBtn">Submit</button>
+                        <button id="playAgainBtn">Play Again</button>
                     </form>
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
-    
-    <!--js-->
-    <script src="./scripts/script.js"></script>
+
+<!-- modal -->
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="messageContainer"></p>
+        </div>
+      </div>
+    </div>
     <!---Bootstrap JS CDN--> 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <!--js-->
+    <script src="./scripts/script.js"></script>
 </body>
 </html>
