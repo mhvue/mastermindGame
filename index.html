@@ -38,13 +38,16 @@
             <div class="col">
                 <h3>Your Past Guesses</h3>
                 <p>Check out our past guesses here along with feedback of those</p>
+                <div>
+                    <p class="history">Your Guess: <p class="historyHolder"></p></p>
+                </div>
             </div>
 
             <!--this row contains the attemps and guesses by user-->
             <div class="row">
                 <div class="col">
                 <!--number of attempts here-->
-                    <h3 class="text-center remaining-info">Your Remaining Attempts: <span>10</span></h3>
+                    <h3 class="text-center remaining-info">Your Remaining Attempts: <span id="guess-num">10</span></h3>
                 <!--combonation of numbers here-->
                     <form>
                         <input class="numHolder" id="target" type="text" value="number here">

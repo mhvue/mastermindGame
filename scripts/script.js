@@ -25,7 +25,7 @@ $(".numHolder").keydown(function(event){
 function countDown() {
     count--;
     console.log("count is now " + count)
-    $("span").text(count)
+    $("#guess-num").text(count)
 }
 
 //this is what happens next as user presses submit button 
@@ -34,12 +34,8 @@ $("#submitBtn").click(function(event){
     let checker = [];
     let incorrectArr= []; //do want to display this 
 
-    
-
     //compared enteredNum values to genreatedNum values 
     for(let i = 0; i < enteredNum.length; i++){        
-
-       //guessed correct numbers 
 
        //guest correct number and its location
        if(enteredNum[i] === newNum[i]){
@@ -53,11 +49,9 @@ $("#submitBtn").click(function(event){
         }
 
         else {
-            //push the non match numbers here 
+            //push the non matched numbers 
             incorrectArr.push(enteredNum[i])
-            // triedNum.push(enteredNum[i]) --keep history of numbers tried
             console.log("incorr ", incorrectArr)
-                  // console.log("sorry no match")
             checker.length = 0
          
             if(i === enteredNum.length-1) {
@@ -68,12 +62,22 @@ $("#submitBtn").click(function(event){
        
 //messages to user
     if(incorrectArr.length === 4){
-        console.log("sorry no match at all")
+        const userMsg = "sorry no match at all";
+        incorrectArr.forEach((n)=> {
+            $(".historyHolder").append(n)
+        })
+        //get msg to pop up first 
+        alert(userMsg)
+        //then append
+        $(".historyHolder").append(` feedback: ${userMsg}`)
         countDown();
    }
     else if(checker.length <= 3){
-        console.log("checker", checker)
-        console.log("almost")
+        const userMsg = "almost";
+        //get msg to pop up first 
+        alert(userMsg)
+        //then append
+        $(".historyHolder").append(userMsg)
         countDown();
    }
 });
