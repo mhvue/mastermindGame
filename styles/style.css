@@ -56,12 +56,12 @@ h1{
 }
 
 
-#submitBtn, #playAgainBtn {
+#submitBtn, #reset-playAgainBtn {
     display: block;
     margin: 1% auto 3% auto;    
 }
 
-#playAgainBtn {
+#reset-playAgainBtn {
     font-size: 25px;
     width: 20%;
 }

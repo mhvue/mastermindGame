@@ -8,6 +8,7 @@ function randomNum () {
         url: "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new",
         method: "GET"
     }).then(function(response){
+        introMsg();
         //console.log(response);
         let generatedNum= [];
         //need to remove whitespaces
@@ -15,61 +16,65 @@ function randomNum () {
         generatedNum.push(num);
         newNum = generatedNum.join().split("");
         console.log(newNum)
-    });
+    })
 }
 
+function introMsg () {
+    $(".modal").modal("show");
+    $(".modal-title").text("Ready to Play?");
+    $(".messageContainer").text("Guess the 4 numbers. Good Luck!")
+}
 randomNum();
-
 function countDown() {
     count--;
-    console.log("count is now " + count)
-    $("#guess-num").text(count)
+    //console.log("count is now " + count)
+    $("#guess-num").text(count);
 
         //game over
     if(count === 0){
         $(".modal").modal("show");
         $(".modal-title").text("Game Over");
-        $(".messageContainer").text("Play again?");
+        $(".messageContainer").text(`The answer was ${newNum.join("")}`);
         $("#submitBtn").prop("disabled", true);
     }
 };
 
 
 //play again to run randomNum, enabled submit btn, restart count, clear guesses
-$("#playAgainBtn").on("click", function() {
-    randomNum();
+$("#reset-playAgainBtn").on("click", function() {
+    randomNum(); 
     count = 10;
     $("#submitBtn").prop("disabled", false);
-    $("#guess-num").text(count)
+    $("#guess-num").text(count);
     $(".historyHolder").html("");
 });
 
+function shortCharMsg () {
+        $(".modal").modal("show");
+        $(".modal-title").text("please input 4 numbers");
+        $(".messageContainer").text("Try again.");
+}
 
 //user presses submit button 
 $("#submitBtn").click(function(event){
     event.preventDefault();
     let checker = [];
-    let incorrectArr= []; 
+    let incorrectArr = []; 
+    // let splitUserNum;
 
-    //get the number from user and push into enteredNumArr ---side note: possibly put in function
+    $(".playAgainBtn").prop("disabled",true);
+    //get the number from user and push into enteredNumArr 
     const userNum= $(".numHolder").val().trim();
-   console.log(userNum.length)
+   //console.log(userNum.length)
    
    //make sure values are not whitespace 
-    if(userNum.length > 4) { //need to keep working on this      
-        $(".modal").modal("show");
-        $(".modal-title").text("please input 4 numbers only");
-        $(".messageContainer").text("Try again.")
-        
-    }else {
+    if(userNum.length > 4 || userNum.length <=3) { 
+        return shortCharMsg();
+   }else {
         enteredNum.push(userNum);
+        splitUserNum = enteredNum.join().split("");
     }
-   // console.log(userNum.length)
-    // enteredNum.push(userNum);
-
- 
-    const splitUserNum = enteredNum.join().split("");
-    //console.log(splitUserNum)
+   
 
   //compared enteredNum values to genreatedNum values 
     for(let i = 0; i < splitUserNum.length; i++){        
