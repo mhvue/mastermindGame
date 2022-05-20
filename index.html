@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="./styles/style.css">
     <!--jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Oswald:wght@700&family=Tapestry&display=swap" rel="stylesheet">
 
 </head>
 <body>
@@ -22,7 +26,7 @@
    
         <!--this row splits in half, 1 containing info, the 2nd the guesses and feedback-->
         <div class="row">
-            <div class="col">
+            <div class="col infoContainer">
                 <!--intro-->
                 <h3>Welcome! This game is to guess the numbers.</h3>
                 <!--Rules here-->
@@ -35,8 +39,8 @@
                     <li>You can view your past guesses and feedback on your right hand side</li>
                 </ul>
             </div>
-            <div class="col">
-                <div>
+            <div class="col guessesContainer">
+                <div class="history">
                     <h4>Your Guesses:</h4>
                     <ul class="historyHolder">
                     </ul>
@@ -51,11 +55,11 @@
                 <!--combonation of numbers here-->
                 <!-- need validation, character limit, pressing enter to submit -->
                     <form> 
-                        <input class="numHolder" type="text" id="target" type="text" placeholder="number here" pattern="/^[0-7]+$/{4}">
-                        <button id="submitBtn">Submit</button>
-                        <button id="playAgainBtn">Play Again</button>
+                        <input class="numHolder" type="text" id="target" placeholder="number here" pattern="[0-7]">
                     </form>
                     
+                    <button type="button" class="btn" id="submitBtn">Submit</button>
+                    <button type="button" class="btn btn-success" id="playAgainBtn">Play Again</button>
                 </div>
             </div>
         </div>

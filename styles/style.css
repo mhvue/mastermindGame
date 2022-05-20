@@ -4,20 +4,67 @@
 
 body {
     margin: 0;
+    background-color: gray;
+    /* background-image: url("../images/numbers.jpg"); */
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.container, .remaining-info {
+.container {
     margin-top: 5%;
     /* border: 1px solid red ; */
 }
 
+.infoContainer{
+    width: 300px;
+    background-color: aquamarine;
+}
+
+.guessesContainer {
+    background-color: wheat;
+    overflow: auto;
+}
+
 h1{
     text-align: center;
+    color: white;
     margin-bottom: 5%;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Oswald', sans-serif;
+    font-family: 'Tapestry', cursive;
+
 }
 .text-center, form, .messageContainer, .modal-title{
     text-align: center;
 }
 
+.remaining-info {
+    color: white;
+}
+
+.history {
+    height: 300px;
+}
+
+.col {
+    padding: 1%;
+}
 
 
+#submitBtn, #playAgainBtn {
+    display: block;
+    margin: 1% auto 3% auto;    
+}
+
+#playAgainBtn {
+    font-size: 25px;
+    width: 20%;
+}
+
+#submitBtn {
+    background-color: beige;
+}
+
+#submitBtn:hover {
+    background-color: bisque
+}

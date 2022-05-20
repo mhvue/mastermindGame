@@ -14,7 +14,7 @@ function randomNum () {
         const num = response.replaceAll("\n", "");
         generatedNum.push(num);
         newNum = generatedNum.join().split("");
-        //console.log(newNum)
+        console.log(newNum)
     });
 }
 
@@ -24,13 +24,22 @@ function countDown() {
     count--;
     console.log("count is now " + count)
     $("#guess-num").text(count)
+
+        //game over
+    if(count === 0){
+        console.log(count)
+        alert("game over")
+        $("#submitBtn").addClass("countZero");
+        $(".countZero").off("click")
+    }
+
 }
 
 
 //play again to run randomNum 
-$(".playAgainBtn").click(function() {
+$(".playAgainBtn").on("click", function() {
     randomNum();
-    $(".historyHolder").html("")
+    $(".historyHolder").html("");
 });
 
 
@@ -42,11 +51,15 @@ $("#submitBtn").click(function(event){
 
     //get the number from user and and to enteredNumArr ---side note: possibly put in function
     const userNum= $(".numHolder").val().trim();
+
     //make sure values are not whitespace 
-    //console.log(userNum)
+    console.log(userNum)
     enteredNum.push(userNum);
+    
     const splitUserNum = enteredNum.join().split("");
    // console.log(splitUserNum)
+
+   
     //compared enteredNum values to genreatedNum values 
     for(let i = 0; i < splitUserNum.length; i++){        
 
@@ -128,7 +141,3 @@ $("input").click(function() {
 });
 
 
-//game over
-if(count === 0){
-    alert("game over")
-}
