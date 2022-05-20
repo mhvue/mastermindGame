@@ -34,6 +34,11 @@ h1{
     font-family: 'Tapestry', cursive;
 
 }
+
+.rules {
+    list-style-type:none ;
+    
+}
 .text-center, form, .messageContainer, .modal-title{
     text-align: center;
 }

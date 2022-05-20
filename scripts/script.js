@@ -27,40 +27,51 @@ function countDown() {
 
         //game over
     if(count === 0){
-        console.log(count)
-        alert("game over")
-        $("#submitBtn").addClass("countZero");
-        $(".countZero").off("click")
+        $(".modal").modal("show");
+        $(".modal-title").text("Game Over");
+        $(".messageContainer").text("Play again?");
+        $("#submitBtn").prop("disabled", true);
     }
+};
 
-}
 
-
-//play again to run randomNum 
-$(".playAgainBtn").on("click", function() {
+//play again to run randomNum, enabled submit btn, restart count, clear guesses
+$("#playAgainBtn").on("click", function() {
     randomNum();
+    count = 10;
+    $("#submitBtn").prop("disabled", false);
+    $("#guess-num").text(count)
     $(".historyHolder").html("");
 });
 
 
-//this is what happens next as user presses submit button 
+//user presses submit button 
 $("#submitBtn").click(function(event){
     event.preventDefault();
     let checker = [];
-    let incorrectArr= []; //do want to display cd this 
+    let incorrectArr= []; 
 
-    //get the number from user and and to enteredNumArr ---side note: possibly put in function
+    //get the number from user and push into enteredNumArr ---side note: possibly put in function
     const userNum= $(".numHolder").val().trim();
-
-    //make sure values are not whitespace 
-    console.log(userNum)
-    enteredNum.push(userNum);
-    
-    const splitUserNum = enteredNum.join().split("");
-   // console.log(splitUserNum)
-
+   console.log(userNum.length)
    
-    //compared enteredNum values to genreatedNum values 
+   //make sure values are not whitespace 
+    if(userNum.length > 4) { //need to keep working on this      
+        $(".modal").modal("show");
+        $(".modal-title").text("please input 4 numbers only");
+        $(".messageContainer").text("Try again.")
+        
+    }else {
+        enteredNum.push(userNum);
+    }
+   // console.log(userNum.length)
+    // enteredNum.push(userNum);
+
+ 
+    const splitUserNum = enteredNum.join().split("");
+    //console.log(splitUserNum)
+
+  //compared enteredNum values to genreatedNum values 
     for(let i = 0; i < splitUserNum.length; i++){        
 
        //guest correct number and its location
@@ -86,50 +97,51 @@ $("#submitBtn").click(function(event){
                 enteredNum.length = 0;
             }
           }
-    }
+    };
     
 //messages to user
     if(incorrectArr.length === 4){
         const userMsg = "Sorry, no match.";
-        const historyList= "<li class='historyItem'><span>"
+        const historyList= "<li class='historyItem'><span>";
         const incorrectVal = incorrectArr.join("");
 
         //get msg to pop up first then append user's guessed number with feedback
         $(".modal").modal("show");
-        $(".modal-title").text("Incorrect.")
-        $(".messageContainer").text("Try again.")
-        $(".historyHolder").append(`${historyList + incorrectVal + "</span></li>"}`)
-        $(".historyHolder").append(` Feedback: ${userMsg}`)
+        $(".modal-title").text("Incorrect.");
+        $(".messageContainer").text("Try again.");
+        $(".historyHolder").append(`${historyList + incorrectVal + "</span></li>"}`);
+        $(".historyHolder").append(` Feedback: ${userMsg}`);
 
-        //reset arrays 
-        incorrectArr = []
+        //reset arrays and count
+        incorrectArr = [];
         enteredNum.length = 0;
-
         countDown();
 
    }
     else if(checker.length <= 3){
-        const userMsg = "almost";
-        const historyList= "<li class='historyItem'><span>"
+        const userMsg = "Almost";
+        const historyList= "<li class='historyItem'><span>";
         const almostVal = splitUserNum.join("");
-
+        console.log(almostVal.length === 0)
+        
+    
         //get msg to pop up first then append user's guessed number with feedback
         $(".modal").modal("show");
-        $(".modal-title").text("So Close")
-        $(".messageContainer").text("Try again.")
-        $(".historyHolder").append(`${historyList + almostVal + "</span></li>"}`)
-        $(".historyHolder").append(` feedback: ${userMsg}`)
+        $(".modal-title").text("So Close");
+        $(".messageContainer").text("Try again.");
+        $(".historyHolder").append(`${historyList + almostVal + "</span></li>"}`);
+        $(".historyHolder").append(` feedback: ${userMsg}`);
 
         //look at checker length to provide some kind of hint 
         if(checker.length >= 2){
-            $(".messageContainer").text("Getting closer!")
+            $(".messageContainer").text("Getting closer!");
         }
 
         //reset arrays 
-        checker = []
+        checker = [];
         enteredNum.length = 0;
-
         countDown();
+    
        
    }
 });

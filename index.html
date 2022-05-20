@@ -30,7 +30,8 @@
                 <!--intro-->
                 <h3>Welcome! This game is to guess the numbers.</h3>
                 <!--Rules here-->
-                <ul>
+                <ul class="rules">
+
                     <li>It is a 4 number combination from 0-7. (ex: 1234,4567,6765 ..etc) *duplicate numbers may exist*</li>
                     <li>You get 10 attempts to guess the 4 number combination </li>
                     <li>Number needs to be in correct placement. </li>
@@ -55,9 +56,10 @@
                 <!--combonation of numbers here-->
                 <!-- need validation, character limit, pressing enter to submit -->
                     <form> 
-                        <input class="numHolder" type="text" id="target" placeholder="number here" pattern="[0-7]">
+                        <input class="numHolder" type="text" id="target" placeholder="number here" pattern="[0-7]{4}" required>
+                       <!-- <input type="button" class="btn" id="submitBtn" value="Submit"> -->
+                       <!-- <input type="button">  -->
                     </form>
-                    
                     <button type="button" class="btn" id="submitBtn">Submit</button>
                     <button type="button" class="btn btn-success" id="playAgainBtn">Play Again</button>
                 </div>
