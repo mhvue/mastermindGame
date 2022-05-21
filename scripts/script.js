@@ -1,6 +1,7 @@
 let enteredNum = [];
 let newNum = [];
 let count = 10;
+let score = 0;
 
 //api here. get the generated numbers and put into generatedNum array.
 function randomNum () {
@@ -36,6 +37,7 @@ function countDown() {
         $(".modal-title").text("Game Over");
         $(".messageContainer").text(`The answer was ${newNum.join("")}`);
         $("#submitBtn").prop("disabled", true);
+        $("#reset-playAgainBtn").text("Play Again")
     }
 };
 
@@ -55,6 +57,13 @@ function shortCharMsg () {
         $(".messageContainer").text("Try again.");
 }
 
+function largeValCharMsg () {
+    $(".modal").modal("show");
+    $(".modal-title").text("please input numbers between 0 - 7");
+    $(".messageContainer").text("Try again.");
+}
+
+
 //user presses submit button 
 $("#submitBtn").click(function(event){
     event.preventDefault();
@@ -65,12 +74,17 @@ $("#submitBtn").click(function(event){
     $(".playAgainBtn").prop("disabled",true);
     //get the number from user and push into enteredNumArr 
     const userNum= $(".numHolder").val().trim();
-   //console.log(userNum.length)
+   console.log(userNum)
    
-   //make sure values are not whitespace 
+   //make sure values are no more than 4 positions but no less 
     if(userNum.length > 4 || userNum.length <=3) { 
         return shortCharMsg();
-   }else {
+   }
+   //make values are not bigger than entering 7 four times
+   else if(userNum > "7777" ){
+       return largeValCharMsg ();
+   }
+   else {
         enteredNum.push(userNum);
         splitUserNum = enteredNum.join().split("");
     }
@@ -86,10 +100,11 @@ $("#submitBtn").click(function(event){
            //console.log("checker", checker, checker[i], i)
             //console.log(enteredNum)
             if(checker.length === 4) {
+                score++;
+                $(".scoreBoard").text(score)
                 $(".modal").modal("show");
                 $(".modal-title").text("Nice!")
                 $(".messageContainer").text("You got all the numbers corret.")
-                alert("congrats match!");
                 enteredNum.length = 0;
            }
         }

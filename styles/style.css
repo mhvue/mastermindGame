@@ -5,14 +5,15 @@
 body {
     margin: 0;
     background-color: gray;
-    /* background-image: url("../images/numbers.jpg"); */
-    background-repeat: no-repeat;
-    background-position: center;
+   
+    background-repeat: repeat;
+    /* background-position: center; */
 }
 
 .container {
     margin-top: 5%;
     /* border: 1px solid red ; */
+  
 }
 
 .infoContainer{
@@ -28,7 +29,6 @@ body {
 h1{
     text-align: center;
     color: white;
-    margin-bottom: 5%;
     font-family: 'Montserrat', sans-serif;
     font-family: 'Oswald', sans-serif;
     font-family: 'Tapestry', cursive;
@@ -39,8 +39,8 @@ h1{
     list-style-type:none ;
     
 }
-.text-center, form, .messageContainer, .modal-title{
-    text-align: center;
+.text-center, form, .messageContainer{
+  text-align: center;
 }
 
 .remaining-info {
@@ -72,4 +72,12 @@ h1{
 
 #submitBtn:hover {
     background-color: bisque
+}
+
+.score {
+    color: yellow;
+}
+
+.borderBottom {
+    border-bottom: 2px solid white;
 }
