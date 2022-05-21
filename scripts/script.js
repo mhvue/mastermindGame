@@ -18,6 +18,7 @@ function randomNum () {
         newNum = generatedNum.join().split("");
         console.log(newNum)
         $("#reset-playAgainBtn").text("Reset");
+        $("#hint-btn").prop("disabled", false);
     })
 }
 
@@ -174,17 +175,17 @@ $("input").click(function() {
     $("input").val(" ");
 });
 
-//hint
+//hint - can only hit once
 $("#hint-btn").click(function() {
-   console.log(newNum)
    //show a number randomly btwn 0-3 based on index but not location
    const randomIndex =  Math.floor((Math.random() * 3) + 0);
-   
+
    //show modal with hint
    $(".modal").modal("show");
    $(".modal-title").text("Hint");
    $(".messageContainer").text(`It contains ${newNum[randomIndex]}.`);
 
+   $("#hint-btn").prop("disabled", true)
 });
 
 
