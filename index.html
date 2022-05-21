@@ -57,14 +57,15 @@
                 <!--combonation of numbers here-->
                 <!-- need validation, character limit, pressing enter to submit -->
                     <form> 
-                        <input class="numHolder" type="text" id="target" placeholder="number here" pattern="[0-7]{4}" required>
-                       <!-- <input type="button" class="btn" id="submitBtn" value="Submit"> -->
-                       <!-- <input type="button">  -->
+                        <input class="numHolder" type="text" id="target" placeholder="number here">
                     </form>
                     <button type="button" class="btn" id="submitBtn">Submit</button>
-                    <button type="button" class="btn btn-success" id="reset-playAgainBtn">Reset</button>
-                    <!-- to start off, it'll say reset. 
-                    once at the end (unsolved or solved), will change to play again. -->
+                    <!---buttons-->
+                    <div class="button-container"> 
+                        <button type="button" class="btn btn-success" id="reset-playAgainBtn">Reset</button>
+                        <button type="button" class="btn btn-warning" id="hint-btn">Hint</button>
+                    </div>
+
                 </div>
             </div>
         </div>

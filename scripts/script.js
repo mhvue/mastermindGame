@@ -17,6 +17,7 @@ function randomNum () {
         generatedNum.push(num);
         newNum = generatedNum.join().split("");
         console.log(newNum)
+        $("#reset-playAgainBtn").text("Reset");
     })
 }
 
@@ -35,9 +36,10 @@ function countDown() {
     if(count === 0){
         $(".modal").modal("show");
         $(".modal-title").text("Game Over");
-        $(".messageContainer").text(`The answer was ${newNum.join("")}`);
+        $(".messageContainer").text(`The answer was ${newNum.join("")}. Hit Play Again button to play again.`);
         $("#submitBtn").prop("disabled", true);
-        $("#reset-playAgainBtn").text("Play Again")
+        $("#reset-playAgainBtn").text("Play Again");
+        score = 0
     }
 };
 
@@ -53,7 +55,7 @@ $("#reset-playAgainBtn").on("click", function() {
 
 function shortCharMsg () {
         $(".modal").modal("show");
-        $(".modal-title").text("please input 4 numbers");
+        $(".modal-title").text("Please Input 4 Numbers");
         $(".messageContainer").text("Try again.");
 }
 
@@ -63,13 +65,12 @@ function largeValCharMsg () {
     $(".messageContainer").text("Try again.");
 }
 
-
 //user presses submit button 
 $("#submitBtn").click(function(event){
     event.preventDefault();
     let checker = [];
     let incorrectArr = []; 
-    // let splitUserNum;
+    let splitUserNum;
 
     $(".playAgainBtn").prop("disabled",true);
     //get the number from user and push into enteredNumArr 
@@ -104,8 +105,9 @@ $("#submitBtn").click(function(event){
                 $(".scoreBoard").text(score)
                 $(".modal").modal("show");
                 $(".modal-title").text("Nice!")
-                $(".messageContainer").text("You got all the numbers corret.")
+                $(".messageContainer").text("You got all the numbers corret. Play Again?")
                 enteredNum.length = 0;
+                
            }
         }
         else {
@@ -170,6 +172,19 @@ $("#submitBtn").click(function(event){
 //clear form when clicked on 
 $("input").click(function() {
     $("input").val(" ");
+});
+
+//hint
+$("#hint-btn").click(function() {
+   console.log(newNum)
+   //show a number randomly btwn 0-3 based on index but not location
+   const randomIndex =  Math.floor((Math.random() * 3) + 0);
+   
+   //show modal with hint
+   $(".modal").modal("show");
+   $(".modal-title").text("Hint");
+   $(".messageContainer").text(`It contains ${newNum[randomIndex]}.`);
+
 });
 
 
