@@ -79,10 +79,21 @@ h1{
     background-color: bisque
 }
 
+#submitBtn:disabled {
+    background-color: lightgray;
+    color: white;
+}
+
 .score {
     color: yellow;
 }
 
 .borderBottom {
     border-bottom: 2px solid white;
+}
+
+#hint-btn:disabled {
+    background-color: lightgray;
+    border: lightgray;
+    color: white;
 }

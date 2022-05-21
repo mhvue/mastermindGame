@@ -39,6 +39,7 @@ function countDown() {
         $(".modal-title").text("Game Over");
         $(".messageContainer").text(`The answer was ${newNum.join("")}. Hit Play Again button to play again.`);
         $("#submitBtn").prop("disabled", true);
+        $("#hint-btn").prop("disabled", true);
         $("#reset-playAgainBtn").text("Play Again");
         score = 0
     }
@@ -46,7 +47,8 @@ function countDown() {
 
 
 //play again to run randomNum, enabled submit btn, restart count, clear guesses
-$("#reset-playAgainBtn").on("click", function() {
+$("#reset-playAgainBtn").on("click", function(event) {
+    event.preventDefault();
     randomNum(); 
     count = 10;
     $("#submitBtn").prop("disabled", false);
@@ -114,7 +116,7 @@ $("#submitBtn").click(function(event){
         else {
             //push the non matched numbers 
             incorrectArr.push(splitUserNum[i])
-            console.log("incorr ", incorrectArr)
+          //  console.log("incorr ", incorrectArr)
          
             if(i === enteredNum.length-1) {
                 enteredNum.length = 0;
