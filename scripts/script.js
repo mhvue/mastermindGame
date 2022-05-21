@@ -99,6 +99,7 @@ $("#submitBtn").click(function(event){
     event.preventDefault();
     let checker = [];
     let incorrectArr = []; 
+    let containsArr =[];
     let splitUserum;
     //get the number from user and push into enteredNumArr 
     const userNum= $(".numHolder").val().trim();
@@ -123,13 +124,13 @@ $("#submitBtn").click(function(event){
 
   //compared enteredNum values to genreatedNum values 
     for(let i = 0; i < splitUserNum.length; i++){        
-
        //guest correct number and its location
        if(splitUserNum[i] === newNum[i]){
            //check value and check index of each array
           checker.push(splitUserNum[i])
-           //console.log("checker", checker, checker[i], i)
-            //console.log(enteredNum)
+           console.log("checker", checker, checker[i], i)
+            console.log(enteredNum)
+            console.log(splitUserNum[i])
             if(checker.length === 4) {
                 score++;
                 $(".scoreBoard").text(score)
@@ -139,7 +140,10 @@ $("#submitBtn").click(function(event){
                 enteredNum.length = 0;
            }
         }
-        //check if contains numbers 
+        //if user input the same num already verified as correct, but in combo with differ nums
+        else if(splitUserNum.includes(newNum[i])){
+            containsArr.push(newNum[i])
+        }
         else {
             //push the non matched numbers 
             incorrectArr.push(splitUserNum[i])
@@ -171,7 +175,7 @@ $("#submitBtn").click(function(event){
         countDown();
 
    }
-    else if(checker.length <= 3){
+    else if(checker.length <= 3 || containsArr.length <= 3){
         const userMsg = "Almost";
         const historyList= "<li class='historyItem'><span>";
         const almostVal = splitUserNum.join("");
@@ -195,9 +199,9 @@ $("#submitBtn").click(function(event){
         //reset arrays 
         checker = [];
         enteredNum.length = 0;
+        containsArr.length = 0;
         countDown();
     
-       
    }
 });
 

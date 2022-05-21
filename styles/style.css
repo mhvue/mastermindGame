@@ -44,6 +44,7 @@ h1{
 }
 
 .remaining-info {
+    margin-top: 1em;
     color: white;
 }
 
@@ -64,7 +65,7 @@ h1{
 #reset-btn, #hint-btn {
     font-size: 25px;
     width: 20%;
-    margin-right: 15px;
+    margin-right: 1em;
 
 }
 
@@ -110,7 +111,7 @@ footer {
 }
 
 #playAgainBtn {
-    margin-top: 15px;
+    margin-top: 1em;
 }
 
 img {
