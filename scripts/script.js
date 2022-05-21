@@ -9,7 +9,7 @@ function randomNum () {
         url: "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new",
         method: "GET"
     }).then(function(response){
-        introMsg();
+        
         //console.log(response);
         let generatedNum= [];
         //need to remove whitespaces
@@ -19,21 +19,28 @@ function randomNum () {
         console.log(newNum)
         $("#reset-playAgainBtn").text("Reset");
         $("#hint-btn").prop("disabled", false);
+        introMsg();
     })
-}
+};
+randomNum();
 
 function introMsg () {
     $(".modal").modal("show");
     $(".modal-title").text("Ready to Play?");
     $(".messageContainer").text("Guess the 4 numbers. Good Luck!")
 }
-randomNum();
+
 function countDown() {
     count--;
     //console.log("count is now " + count)
     $("#guess-num").text(count);
 
-        //game over
+    //halfway count
+    if(count === 5) {
+        $("#guess-num").css("color", "#8B0000")
+    }
+
+    //game over
     if(count === 0){
         $(".modal").modal("show");
         $(".modal-title").text("Game Over");
@@ -41,9 +48,23 @@ function countDown() {
         $("#submitBtn").prop("disabled", true);
         $("#hint-btn").prop("disabled", true);
         $("#reset-playAgainBtn").text("Play Again");
+        $("#guess-num").css("color", "#fff")
         score = 0
     }
 };
+
+function shortCharMsg () {
+    $(".modal").modal("show");
+    $(".modal-title").text("Please Input 4 Numbers");
+    $(".messageContainer").text("Try again.");
+}
+
+function largeValCharMsg () {
+    $(".modal").modal("show");
+    $(".modal-title").text("please input numbers between 0 - 7");
+    $(".messageContainer").text("Try again.");
+}
+
 
 
 //play again to run randomNum, enabled submit btn, restart count, clear guesses
@@ -56,17 +77,6 @@ $("#reset-playAgainBtn").on("click", function(event) {
     $(".historyHolder").html("");
 });
 
-function shortCharMsg () {
-        $(".modal").modal("show");
-        $(".modal-title").text("Please Input 4 Numbers");
-        $(".messageContainer").text("Try again.");
-}
-
-function largeValCharMsg () {
-    $(".modal").modal("show");
-    $(".modal-title").text("please input numbers between 0 - 7");
-    $(".messageContainer").text("Try again.");
-}
 
 //user presses submit button 
 $("#submitBtn").click(function(event){
@@ -74,14 +84,15 @@ $("#submitBtn").click(function(event){
     let checker = [];
     let incorrectArr = []; 
     let splitUserNum;
-
-    $(".playAgainBtn").prop("disabled",true);
     //get the number from user and push into enteredNumArr 
     const userNum= $(".numHolder").val().trim();
-   console.log(userNum)
-   
+    console.log(userNum)
+
+    $(".playAgainBtn").prop("disabled",true);
+    console.log(userNum.length)
    //make sure values are no more than 4 positions but no less 
-    if(userNum.length > 4 || userNum.length <=3) { 
+    if(userNum.length > 4 || userNum.length <= 3) { 
+        console.log("shortChar")
         return shortCharMsg();
    }
    //make values are not bigger than entering 7 four times
@@ -110,9 +121,9 @@ $("#submitBtn").click(function(event){
                 $(".modal-title").text("Nice!")
                 $(".messageContainer").text("You got all the numbers corret. Play Again?")
                 enteredNum.length = 0;
-                
            }
         }
+    
         else {
             //push the non matched numbers 
             incorrectArr.push(splitUserNum[i])
