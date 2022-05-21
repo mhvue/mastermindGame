@@ -3,7 +3,12 @@ let newNum = [];
 let count = 10;
 let score = 0;
 
+
 //api here. get the generated numbers and put into generatedNum array.
+/**
+ * Generates a random number from the random api
+ * @returns 
+ */
 function randomNum () {
     return $.ajax({
         url: "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new",
@@ -17,9 +22,10 @@ function randomNum () {
         generatedNum.push(num);
         newNum = generatedNum.join().split("");
         console.log(newNum)
-        $("#reset-playAgainBtn").text("Reset");
+        $("#reset-btn").text("Reset");
         $("#hint-btn").prop("disabled", false);
         introMsg();
+        $("#playAgainBtn").hide();
     })
 };
 randomNum();
@@ -42,12 +48,14 @@ function countDown() {
 
     //game over
     if(count === 0){
+        const showPlayBtn = $("#playAgainBtn").show();
         $(".modal").modal("show");
         $(".modal-title").text("Game Over");
-        $(".messageContainer").text(`The answer was ${newNum.join("")}. Hit Play Again button to play again.`);
+        $(".messageContainer").text(`The answer was ${newNum.join("")}. Hit Play Again button to play again.`)
+                             .append(showPlayBtn);
         $("#submitBtn").prop("disabled", true);
         $("#hint-btn").prop("disabled", true);
-        $("#reset-playAgainBtn").text("Play Again");
+        $("#reset-btn").text("Play Again");
         $("#guess-num").css("color", "#fff")
         score = 0
     }
@@ -66,9 +74,17 @@ function largeValCharMsg () {
 }
 
 
-
 //play again to run randomNum, enabled submit btn, restart count, clear guesses
-$("#reset-playAgainBtn").on("click", function(event) {
+$("#reset-btn").on("click", function(event) {
+    event.preventDefault();
+    randomNum(); 
+    count = 10;
+    $("#submitBtn").prop("disabled", false);
+    $("#guess-num").text(count);
+    $(".historyHolder").html("");
+});
+
+$("#playAgainBtn").on("click", function(event) {
     event.preventDefault();
     randomNum(); 
     count = 10;
@@ -83,7 +99,7 @@ $("#submitBtn").click(function(event){
     event.preventDefault();
     let checker = [];
     let incorrectArr = []; 
-    let splitUserNum;
+    let splitUserum;
     //get the number from user and push into enteredNumArr 
     const userNum= $(".numHolder").val().trim();
     console.log(userNum)
@@ -123,7 +139,7 @@ $("#submitBtn").click(function(event){
                 enteredNum.length = 0;
            }
         }
-    
+        //check if contains numbers 
         else {
             //push the non matched numbers 
             incorrectArr.push(splitUserNum[i])
@@ -140,11 +156,12 @@ $("#submitBtn").click(function(event){
         const userMsg = "Sorry, no match.";
         const historyList= "<li class='historyItem'><span>";
         const incorrectVal = incorrectArr.join("");
+        const tryAaginImg = "<img src='./images/xBtn.svg' alt= 'red box with white x' >";
 
         //get msg to pop up first then append user's guessed number with feedback
         $(".modal").modal("show");
         $(".modal-title").text("Incorrect.");
-        $(".messageContainer").text("Try again.");
+        $(".modal-body").html(tryAaginImg).append("Try Again").hasClass("text-center")// still working on this
         $(".historyHolder").append(`${historyList + incorrectVal + "</span></li>"}`);
         $(".historyHolder").append(` Feedback: ${userMsg}`);
 
@@ -158,12 +175,14 @@ $("#submitBtn").click(function(event){
         const userMsg = "Almost";
         const historyList= "<li class='historyItem'><span>";
         const almostVal = splitUserNum.join("");
+        const tryAaginImg = "<img src='./images/xBtn.svg'>"
         console.log(almostVal.length === 0)
         
     
         //get msg to pop up first then append user's guessed number with feedback
         $(".modal").modal("show");
         $(".modal-title").text("So Close");
+        $(".modal-body").html(tryAaginImg);
         $(".messageContainer").text("Try again.");
         $(".historyHolder").append(`${historyList + almostVal + "</span></li>"}`);
         $(".historyHolder").append(` feedback: ${userMsg}`);

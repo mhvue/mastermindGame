@@ -4,7 +4,7 @@
 
 body {
     margin: 0;
-    background-color: gray;
+    background-color: #000;
    
     background-repeat: repeat;
     /* background-position: center; */
@@ -51,11 +51,6 @@ h1{
     height: 300px;
 }
 
-.col {
-    padding: 1%;
-}
-
-
 #submitBtn{
     display: block;
     margin: 1% auto 3% auto;    
@@ -66,7 +61,7 @@ h1{
     text-align: center;
 }
 
-#reset-playAgainBtn, #hint-btn {
+#reset-btn, #hint-btn {
     font-size: 25px;
     width: 20%;
     margin-right: 15px;
@@ -83,7 +78,7 @@ h1{
 
 #submitBtn:disabled {
     background-color: lightgray;
-    color: white;
+    color: #fff;
 }
 
 .score {
@@ -91,15 +86,33 @@ h1{
 }
 
 .borderBottom {
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid #fff;
 }
 
 #hint-btn:disabled {
     background-color: lightgray;
     border: lightgray;
-    color: white;
+    color: #fff;
 }
 
 .text-bold {
     font-weight: 700;
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Oswald', sans-serif;
+}
+
+footer {
+    margin-top: 1%;
+    color: white;
+}
+
+#playAgainBtn {
+    margin-top: 15px;
+}
+
+img {
+    width: 30%;
 }
