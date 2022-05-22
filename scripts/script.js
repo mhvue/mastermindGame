@@ -100,14 +100,17 @@ $("#submitBtn").click(function(event){
     let checker = [];
     let incorrectArr = []; 
     let containsArr =[];
-    let splitUserum;
+    let splitUserNum;
+    const correctImg = $("<img src='./images/correctBtn.svg' alt= 'red box with white x' >");
+    const correctMsg = $("<p> You got all the numbers corret. Play Again?</p>");
     //get the number from user and push into enteredNumArr 
     const userNum= $(".numHolder").val().trim();
     console.log(userNum)
 
     $(".playAgainBtn").prop("disabled",true);
     console.log(userNum.length)
-   //make sure values are no more than 4 positions but no less 
+
+    //Checking Values-make sure values are no more than 4 positions but no less. 
     if(userNum.length > 4 || userNum.length <= 3) { 
         console.log("shortChar")
         return shortCharMsg();
@@ -131,17 +134,11 @@ $("#submitBtn").click(function(event){
            console.log("checker", checker, checker[i], i)
             console.log(enteredNum)
             console.log(splitUserNum[i])
-            if(checker.length === 4) {
-                score++;
-                $(".scoreBoard").text(score)
-                $(".modal").modal("show");
-                $(".modal-title").text("Nice!")
-                $(".messageContainer").text("You got all the numbers corret. Play Again?")
-                enteredNum.length = 0;
-           }
+          
         }
         //if user input the same num already verified as correct, but in combo with differ nums
         else if(splitUserNum.includes(newNum[i])){
+            console.log(containsArr)
             containsArr.push(newNum[i])
         }
         else {
@@ -156,17 +153,27 @@ $("#submitBtn").click(function(event){
     };
     
 //messages to user
-    if(incorrectArr.length === 4){
+    if(checker.length === 4) {
+        score++;
+        $(".scoreBoard").text(score)
+        $(".modal").modal("show");
+        $(".modal-title").text("Nice!")
+        $(".messageContainer").html(correctImg).append(correctMsg);
+        enteredNum.length = 0;
+    }
+    else if(incorrectArr.length === 4){
         const userMsg = "Sorry, no match.";
-        const historyList= "<li class='historyItem'><span>";
+        const historyList= $("<li class='historyItem'><span>");
         const incorrectVal = incorrectArr.join("");
-        const tryAaginImg = "<img src='./images/xBtn.svg' alt= 'red box with white x' >";
-
+        const tryAgainImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
+        const tryAgainMsg = $("<p> Try Again </p>");
+        
+        
         //get msg to pop up first then append user's guessed number with feedback
         $(".modal").modal("show");
         $(".modal-title").text("Incorrect.");
-        $(".modal-body").html(tryAaginImg).append("Try Again").hasClass("text-center")// still working on this
-        $(".historyHolder").append(`${historyList + incorrectVal + "</span></li>"}`);
+        $(".messageContainer").html(tryAgainImg).append(tryAgainMsg);
+        $(".historyHolder").append(`${historyList + incorrectVal}`);
         $(".historyHolder").append(` Feedback: ${userMsg}`);
 
         //reset arrays and count
@@ -179,20 +186,19 @@ $("#submitBtn").click(function(event){
         const userMsg = "Almost";
         const historyList= "<li class='historyItem'><span>";
         const almostVal = splitUserNum.join("");
-        const tryAaginImg = "<img src='./images/xBtn.svg'>"
-        console.log(almostVal.length === 0)
+        const tryAgainImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
+        const tryAgainMsg = $("<p> Try Again </p>");
         
     
         //get msg to pop up first then append user's guessed number with feedback
         $(".modal").modal("show");
         $(".modal-title").text("So Close");
-        $(".modal-body").html(tryAaginImg);
-        $(".messageContainer").text("Try again.");
-        $(".historyHolder").append(`${historyList + almostVal + "</span></li>"}`);
+        $(".messageContainer").html(tryAgainImg).append(tryAgainMsg);
+        $(".historyHolder").append(`${historyList + almostVal}`);
         $(".historyHolder").append(` feedback: ${userMsg}`);
 
         //look at checker length to provide some kind of hint 
-        if(checker.length >= 2){
+        if(checker.length === 2 ){
             $(".messageContainer").text("Getting closer!");
         }
 
