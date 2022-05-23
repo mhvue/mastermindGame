@@ -34,6 +34,7 @@ function messageModal (message, image){
     $(".modal-title").text("Try Again");
     $(".gameOver-title").text("Game Over");
     $(".correct-title").text("Congrats!");
+    $(".hint-title").text("Hint");
     $(".messageContainer").html(image).append(message);
 
     
@@ -62,11 +63,13 @@ function countDown() {
        // $(".modal").modal("show");
         $(".modal-title").addClass("gameOver-title");
         messageModal(`The answer was ${newNum.join("")}`);
+
+        //NEED TO WORK ON THIS NEXT - NEED GAME OVER IMAGE TO SHOW AND TITLE TO CHANGE.
+
         // $(".modal-title").text("Game Over");
         //$(".messageContainer").text(`The answer was ${newNum.join("")}. Hit Play Again button to play again.`);
        // $("#playAgainBtn").show()
-        $("#submitBtn").prop("disabled", true);
-        $("#hint-btn").prop("disabled", true);
+        $("#submitBtn, #hint-btn").prop("disabled", true);
         $("#reset-btn").text("Play Again");
         $("#guess-num").css("color", "#fff");
         score = 0
@@ -163,8 +166,8 @@ $("#submitBtn").click(function(event){
     if(checker.length === 4) {
         const correctImg = $("<img src='./images/correctBtn.svg' alt= 'red box with white x' >");
         const correctMsg = $("<h5> You got all the numbers corret. Play Again?</h5>");
+
         score++;
-        
         $(".scoreBoard").text(score);
         $(".modal-title").addClass("correct-title");
         messageModal(correctImg, correctMsg)
@@ -173,17 +176,16 @@ $("#submitBtn").click(function(event){
         enteredNum.length = 0;
     }
     else if(incorrectArr.length === 4){
-        const feedbackMsg = $("<p> Sorry No Match </p>")
-        const historyList= $("<li class='historyItem'><span>");
         const incorrectVal = incorrectArr.join("");
         const tryAgainImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
         const tryAgainMsg = $("<h5>Sorry, no match.</h5>");
+        const historyList= $("<li>").addClass("historyItem").append(`${incorrectVal} `).append("<span>Incorrect</span>")
         
         
         //get msg to pop up first then append user's guessed number with feedback
         $(".modal-title").addClass("incorrect-title")
         messageModal(tryAgainImg, tryAgainMsg);
-        $(".historyHolder").append(historyList).append([incorrectVal, feedbackMsg]); //WORKING ON THIS
+        $(".historyHolder").append(historyList); 
 
         //reset arrays and count
         incorrectArr = [];
@@ -192,23 +194,20 @@ $("#submitBtn").click(function(event){
 
    }
     else if(checker.length <= 3 || containsArr.length <= 3){
-        const userMsg = "Almost";
-        const historyList= "<li class='historyItem'><span>";
+      
         const almostVal = splitUserNum.join("");
-        const tryAgainImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
-        const tryAgainMsg = $("<p> Try Again </p>");
+        const almostImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
+        const almostMsg = $("<p> You are close! Keep trying. </p>");
+        const historyList= $("<li>").addClass("historyItem").append(`${almostVal} `).append("<span>Almost.</span>")
         
     
         //get msg to pop up first then append user's guessed number with feedback
-        $(".modal").modal("show");
-        $(".modal-title").text("So Close");
-        $(".messageContainer").html(tryAgainImg).append(tryAgainMsg);
-        $(".historyHolder").append(`${historyList + almostVal}`);
-        $(".historyHolder").append(` feedback: ${userMsg}`);
+        messageModal(almostImg, almostMsg);
+        $(".historyHolder").append(historyList); 
 
         //look at checker length to provide some kind of hint 
         if(checker.length === 2 ){
-            $(".messageContainer").text("Getting closer!");
+            $(".messageContainer").text("Wow! You got two numbers correct.");
         }
 
         //reset arrays 
@@ -228,17 +227,16 @@ $("input").click(function() {
 
 //hint - can only hit once
 $("#hint-btn").click(function() {
-   //show a number randomly btwn 0-3 based on index but not location
+   //show a number randomly btwn 0-3 based on index but not location, to show value to user
    const randomIndex =  Math.floor((Math.random() * 3) + 0);
    const hintImg = $("<img src='./images/hint.jpg' alt= 'hint word on keyboard' >");
    const hintMsg = $("<p>").text(`It contains ${newNum[randomIndex]}`);
 
    //show modal with hint
-   $(".modal").modal("show");
-   $(".modal-title").text("Hint");
-   $(".messageContainer").html(hintImg).append(hintMsg);
+   $(".modal-title").addClass("hint-title");
+   messageModal(hintImg, hintMsg);
    $("#playAgainBtn").hide();
-   $("#hint-btn").prop("disabled", true)
+   $("#hint-btn").prop("disabled", true);
 });
 
 
