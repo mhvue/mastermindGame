@@ -28,10 +28,15 @@ randomNum();
 
 
 //modal messages 
-function messageModal (message){
+function messageModal (message, image){
+
     $(".modal").modal("show");
     $(".modal-title").text("Try Again");
-    $(".messageContainer").html(message);
+    $(".gameOver-title").text("Game Over");
+    $(".correct-title").text("Congrats!");
+    $(".messageContainer").html(image).append(message);
+
+    
 }
 
 function introMsg () {
@@ -54,10 +59,12 @@ function countDown() {
     //game over
     if(count === 0){
        
-        $(".modal").modal("show");
-        $(".modal-title").text("Game Over");
-        $(".messageContainer").text(`The answer was ${newNum.join("")}. Hit Play Again button to play again.`);
-        $("#playAgainBtn").show()
+       // $(".modal").modal("show");
+        $(".modal-title").addClass("gameOver-title");
+        messageModal(`The answer was ${newNum.join("")}`);
+        // $(".modal-title").text("Game Over");
+        //$(".messageContainer").text(`The answer was ${newNum.join("")}. Hit Play Again button to play again.`);
+       // $("#playAgainBtn").show()
         $("#submitBtn").prop("disabled", true);
         $("#hint-btn").prop("disabled", true);
         $("#reset-btn").text("Play Again");
@@ -155,31 +162,28 @@ $("#submitBtn").click(function(event){
 //messages to user
     if(checker.length === 4) {
         const correctImg = $("<img src='./images/correctBtn.svg' alt= 'red box with white x' >");
-        const correctMsg = $("<p> You got all the numbers corret. Play Again?</p>");
+        const correctMsg = $("<h5> You got all the numbers corret. Play Again?</h5>");
         score++;
         
         $(".scoreBoard").text(score);
-        $(".modal").modal("show");
-        $(".modal-title").text("Nice!");
-        $(".messageContainer").html(correctImg).append(correctMsg);
+        $(".modal-title").addClass("correct-title");
+        messageModal(correctImg, correctMsg)
         $("#playAgainBtn").show()
         $("#reset-btn").text("Play Again");
         enteredNum.length = 0;
     }
     else if(incorrectArr.length === 4){
-        const userMsg = "Sorry, no match.";
+        const feedbackMsg = $("<p> Sorry No Match </p>")
         const historyList= $("<li class='historyItem'><span>");
         const incorrectVal = incorrectArr.join("");
         const tryAgainImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
-        const tryAgainMsg = $("<p> Try Again </p>");
+        const tryAgainMsg = $("<h5>Sorry, no match.</h5>");
         
         
         //get msg to pop up first then append user's guessed number with feedback
-        $(".modal").modal("show");
-        $(".modal-title").text("Incorrect.");
-        $(".messageContainer").html(tryAgainImg).append(tryAgainMsg);
-        $(".historyHolder").append(`${historyList + incorrectVal}`);
-        $(".historyHolder").append(` Feedback: ${userMsg}`);
+        $(".modal-title").addClass("incorrect-title")
+        messageModal(tryAgainImg, tryAgainMsg);
+        $(".historyHolder").append(historyList).append([incorrectVal, feedbackMsg]); //WORKING ON THIS
 
         //reset arrays and count
         incorrectArr = [];
