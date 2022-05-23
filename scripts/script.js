@@ -2,8 +2,6 @@ let enteredNum = [];
 let newNum = [];
 let count = 10;
 let score = 0;
-
-
 //api here. get the generated numbers and put into generatedNum array.
 /**
  * Generates a random number from the random api
@@ -43,20 +41,20 @@ function countDown() {
 
     //halfway count
     if(count === 5) {
-        $("#guess-num").css("color", "#8B0000")
+        $("#guess-num").css("color", "#8B0000");
     }
 
     //game over
     if(count === 0){
-        const showPlayBtn = $("#playAgainBtn").show();
+       
         $(".modal").modal("show");
         $(".modal-title").text("Game Over");
-        $(".messageContainer").text(`The answer was ${newNum.join("")}. Hit Play Again button to play again.`)
-                             .append(showPlayBtn);
+        $(".messageContainer").text(`The answer was ${newNum.join("")}. Hit Play Again button to play again.`);
+        $("#playAgainBtn").show()
         $("#submitBtn").prop("disabled", true);
         $("#hint-btn").prop("disabled", true);
         $("#reset-btn").text("Play Again");
-        $("#guess-num").css("color", "#fff")
+        $("#guess-num").css("color", "#fff");
         score = 0
     }
 };
@@ -84,6 +82,7 @@ $("#reset-btn").on("click", function(event) {
     $(".historyHolder").html("");
 });
 
+//play again button on modal 
 $("#playAgainBtn").on("click", function(event) {
     event.preventDefault();
     randomNum(); 
@@ -101,13 +100,12 @@ $("#submitBtn").click(function(event){
     let incorrectArr = []; 
     let containsArr =[];
     let splitUserNum;
-    const correctImg = $("<img src='./images/correctBtn.svg' alt= 'red box with white x' >");
-    const correctMsg = $("<p> You got all the numbers corret. Play Again?</p>");
+   
     //get the number from user and push into enteredNumArr 
     const userNum= $(".numHolder").val().trim();
     console.log(userNum)
 
-    $(".playAgainBtn").prop("disabled",true);
+    $("#playAgainBtn").prop("disabled",false);
     console.log(userNum.length)
 
     //Checking Values-make sure values are no more than 4 positions but no less. 
@@ -154,11 +152,16 @@ $("#submitBtn").click(function(event){
     
 //messages to user
     if(checker.length === 4) {
+        const correctImg = $("<img src='./images/correctBtn.svg' alt= 'red box with white x' >");
+        const correctMsg = $("<p> You got all the numbers corret. Play Again?</p>");
         score++;
-        $(".scoreBoard").text(score)
+        
+        $(".scoreBoard").text(score);
         $(".modal").modal("show");
-        $(".modal-title").text("Nice!")
+        $(".modal-title").text("Nice!");
         $(".messageContainer").html(correctImg).append(correctMsg);
+        $("#playAgainBtn").show()
+        $("#reset-btn").text("Play Again");
         enteredNum.length = 0;
     }
     else if(incorrectArr.length === 4){
