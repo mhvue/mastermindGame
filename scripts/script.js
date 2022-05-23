@@ -73,7 +73,13 @@ function largeValCharMsg () {
 //play again to run randomNum, enabled submit btn, restart count, clear guesses
 $("#reset-btn").on("click", function(event) {
     event.preventDefault();
-    randomNum(); 
+
+    $(".modal").modal("show");
+    $(".modal-title").text("Game Over");
+    $(".messageContainer").text(`The answer was ${newNum.join("")}. Hit Play Again button to play again.`);
+    $("#playAgainBtn").show()
+
+
     count = 10;
     $("#submitBtn").prop("disabled", false);
     $("#guess-num").text(count);
@@ -81,13 +87,13 @@ $("#reset-btn").on("click", function(event) {
 });
 
 //play again button on modal 
-$("#playAgainBtn").on("click", function(event) {
-    event.preventDefault();
-    randomNum(); 
+$("#playAgainBtn").on("click", function() {
+    randomNum()
     count = 10;
     $("#submitBtn").prop("disabled", false);
     $("#guess-num").text(count);
     $(".historyHolder").html("");
+    
 });
 
 
@@ -222,12 +228,14 @@ $("input").click(function() {
 $("#hint-btn").click(function() {
    //show a number randomly btwn 0-3 based on index but not location
    const randomIndex =  Math.floor((Math.random() * 3) + 0);
+   const hintImg = $("<img src='./images/hint.jpg' alt= 'hint word on keyboard' >");
+   const hintMsg = $("<p>").text(`It contains ${newNum[randomIndex]}`);
 
    //show modal with hint
    $(".modal").modal("show");
    $(".modal-title").text("Hint");
-   $(".messageContainer").text(`It contains ${newNum[randomIndex]}.`);
-
+   $(".messageContainer").html(hintImg).append(hintMsg);
+   $("#playAgainBtn").hide();
    $("#hint-btn").prop("disabled", true)
 });
 
