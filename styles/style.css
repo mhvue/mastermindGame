@@ -5,13 +5,12 @@
 body {
     margin: 0;
     background-color: #000;
-   
     background-repeat: repeat;
-    /* background-position: center; */
 }
 
 .container {
     margin-top: 5%;
+    padding: 5%;
     /* border: 1px solid red ; */
   
 }
@@ -120,4 +119,12 @@ img {
 
 .noShow {
     display: none;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: blue;
 }

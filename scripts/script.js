@@ -3,10 +3,8 @@ let newNum = [];
 let count = 10;
 let score = 0;
 //api here. get the generated numbers and put into generatedNum array.
-/**
- * Generates a random number from the random api
- * @returns 
- */
+
+
 function randomNum () {
     return $.ajax({
         url: "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new",
