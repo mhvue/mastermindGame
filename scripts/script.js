@@ -26,11 +26,20 @@ function randomNum () {
 };
 randomNum();
 
+
+//modal messages 
+function messageModal (message){
+    $(".modal").modal("show");
+    $(".modal-title").text("Try Again");
+    $(".messageContainer").html(message);
+}
+
 function introMsg () {
     $(".modal").modal("show");
     $(".modal-title").text("Ready to Play?");
     $(".messageContainer").text("Guess the 4 numbers. Good Luck!")
 }
+
 
 function countDown() {
     count--;
@@ -57,17 +66,6 @@ function countDown() {
     }
 };
 
-function shortCharMsg () {
-    $(".modal").modal("show");
-    $(".modal-title").text("Please Input 4 Numbers");
-    $(".messageContainer").text("Try again.");
-}
-
-function largeValCharMsg () {
-    $(".modal").modal("show");
-    $(".modal-title").text("please input numbers between 0 - 7");
-    $(".messageContainer").text("Try again.");
-}
 
 
 //play again to run randomNum, enabled submit btn, restart count, clear guesses
@@ -115,11 +113,11 @@ $("#submitBtn").click(function(event){
     //Checking Values-make sure values are no more than 4 positions but no less. 
     if(userNum.length > 4 || userNum.length <= 3) { 
         console.log("shortChar")
-        return shortCharMsg();
+        return messageModal("You are short on numbers. Please input 4 numbers.");
    }
    //make values are not bigger than entering 7 four times
    else if(userNum > "7777" ){
-       return largeValCharMsg ();
+       return messageModal("Your numbers are bigger than 7. Please input 0-7.");
    }
    else {
         enteredNum.push(userNum);
