@@ -110,16 +110,24 @@ footer {
 }
 
 #playAgainBtn {
-    margin-top: 1em;
+    margin: 1em 1em;
 }
 
 img {
+    /* float: left; */
     width: 20%;
 }
 
 .noShow {
     display: none;
 }
+
+/* .text-position {
+    position: relative;
+    top: 30px;
+    right: 30px;
+
+} */
 
 footer {
     position: fixed;
@@ -128,3 +136,4 @@ footer {
     right: 0;
     background-color: blue;
 }
+
