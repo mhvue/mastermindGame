@@ -32,7 +32,6 @@ function randomNum () {
 };
 randomNum();
 
-
 /**
  * function to create custom messages as modal pops up
  * @param {string} message 
@@ -96,8 +95,10 @@ $("#reset-btn").on("click", function(event) {
     //start count at 10 again 
     count = 10;
 
-     //enable submit button, show count restarted, and clear history 
-    $("#submitBtn").prop("disabled", false);
+    //disable submit button and hint button,  show count restarted, and clear history 
+    $("#submitBtn, #hint-btn").each(function() {
+        $(this).prop("disabled", true)
+    });
     $("#guess-num").text(count);
     $(".historyHolder").html("");
 });
@@ -131,6 +132,7 @@ $("#submitBtn").click(function(event){
     const userNum= $(".numHolder").val().trim();
 
     $(".playAgainBtn").prop("disabled",false);
+    $(".playAgainBtn").hide();
 
     //input of numbers that equal 0-7 and only 4 characters 
     if(userNum.match(checkRegEx) && userNum.length === 4){
@@ -181,7 +183,9 @@ $("#submitBtn").click(function(event){
         const correctMsg = $("<h5> You got all the numbers corret. Play Again?</h5>");
         const winSound = new Audio("./other/win_bell.wav");
 
+        //winning sound 
         winSound.play();
+
         //increase score 
         score++;
         $(".scoreBoard").text(score);
