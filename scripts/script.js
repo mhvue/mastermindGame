@@ -84,9 +84,7 @@ function countDown() {
 
 
 //reset to run randomNum, enabled submit btn, restart count, clear guesses
-$("#reset-btn").on("click", function(event) {
-    event.preventDefault();
-
+$("#reset-btn").on("click", function() {
     //pop up msg to show the correct answer and offer to replay 
     $(".modal-title").removeClass("intro-title try-title almost-title correct-title hint-title").addClass("gameOver-title");
     messageModal(`The answer was ${newNum.join("")} Hit Play Again button to play again`);
@@ -120,13 +118,14 @@ $(".playAgainBtn").on("click", function(event) {
 
 
 //user presses submit button 
-$("#submitBtn").click(function(event){
-    event.preventDefault();
+$("#submitBtn").click(function(){
+    //event.preventDefault();
     let checker = [];
     let incorrectArr = []; 
     let containsArr =[];
     let splitUserNum;
     const checkRegEx = /^[0-7]+$/; //with the help from stackOverflow
+    const checkLetters = /^[A-Za-z]+$/
    
     //get the number from user and push into enteredNumArr 
     const userNum= $(".numHolder").val().trim();
@@ -140,7 +139,7 @@ $("#submitBtn").click(function(event){
         splitUserNum = enteredNum.join().split("");
     }
     //input of numbers more than 4 characters, input of numbers less than 4
-    else if(userNum.length > 4 || userNum.length <= 3) { 
+    else if(userNum.length > 4 || userNum.length <= 3 || userNum.match(checkLetters)) { 
         $(".modal-title").removeClass("intro-title almost-title gameOver-title correct-title hint-title").addClass("try-title");
         return messageModal("Please input 4 numbers.");
    }
