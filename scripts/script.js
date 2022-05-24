@@ -13,18 +13,20 @@ function randomNum () {
         url: "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new",
         method: "GET"
     }).then(function(response){
-        
         let generatedNum= [];
         //to remove whitespaces
         const num = response.replaceAll("\n", "");
-
+        
         generatedNum.push(num);
         newNum = generatedNum.join().split("");
-     
+        console.log(newNum)
+        //pop up message to welcome user
         $(".modal-title").addClass("intro-title");
+        messageModal("Let's Play! Guess the 4 number combination.")
+
+        //show reset button, hint button active and hite play again button on modal
         $("#reset-btn").text("Reset");
         $("#hint-btn").prop("disabled", false);
-        messageModal("Let's Play! Guess the 4 number combination.")
         $(".playAgainBtn").hide();
     })
 };
@@ -177,7 +179,9 @@ $("#submitBtn").click(function(event){
     if(checker.length === 4) {
         const correctImg = $("<img src='./images/correctBtn.svg' alt= 'red box with white x' >");
         const correctMsg = $("<h5> You got all the numbers corret. Play Again?</h5>");
+        const winSound = new Audio("./other/win_bell.wav");
 
+        winSound.play();
         //increase score 
         score++;
         $(".scoreBoard").text(score);
