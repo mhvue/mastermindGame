@@ -116,6 +116,7 @@ footer {
 img {
     /* float: left; */
     width: 20%;
+    margin-bottom: 1em;
 }
 
 .noShow {
