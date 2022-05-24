@@ -59,9 +59,10 @@
                 <div class="col">
                 <!--number of attempts here-->
                     <h3 class="text-center remaining-info">Your Remaining Attempts: <span id="guess-num">10</span></h3>
-                <!--combonation of numbers here-->
-                <!-- need validation, character limit, pressing enter to submit -->
-                    <form> 
+                
+                <!-- form to input numbers -->
+                <!-- help from stackOverflow on making sure form doesn't refresh after hitting enter-->
+                    <form action="javascript:void(0);"> 
                         <input class="numHolder" type="text" id="target" placeholder="number here">
                     </form>
                     <button type="button" class="btn" id="submitBtn">Submit</button>
