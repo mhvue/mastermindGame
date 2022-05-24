@@ -11,8 +11,7 @@ body {
 .container {
     margin-top: 5%;
     padding: 5%;
-    /* border: 1px solid red ; */
-  
+
 }
 
 .infoContainer{
@@ -34,12 +33,31 @@ h1{
 
 }
 
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Oswald', sans-serif;
+}
+
+img {
+    width: 20%;
+    margin-bottom: 1em;
+}
+
+
 .rules {
     list-style-type: circle ;
     
 }
 .text-center, form, .messageContainer{
   text-align: center;
+}
+
+.score {
+    color: yellow;
+}
+
+.text-bold {
+    font-weight: 700;
 }
 
 .remaining-info {
@@ -51,90 +69,50 @@ h1{
     height: 300px;
 }
 
-#submitBtn{
-    display: block;
-    margin: 1% auto 3% auto;    
+.button-container {
+    text-align: center;
 }
 
-.button-container {
-    /* margin: 0 auto; */
-    text-align: center;
+#submitBtn{
+    display: block;
+    margin-top: 1%; 
+    margin-right: auto; 
+    margin-bottom: 3% ;
+    margin-left: auto; 
+    background-color: #f5f5dc;
+}
+
+#submitBtn:hover {
+    background-color: #ffe4c4;
+}
+
+#submitBtn:disabled {
+    background-color: #d3d3d3;
+    color: #fff;
 }
 
 #reset-btn, #hint-btn {
     font-size: 25px;
     width: 20%;
     margin-right: 1em;
-
-}
-
-#submitBtn {
-    background-color: beige;
-}
-
-#submitBtn:hover {
-    background-color: bisque
-}
-
-#submitBtn:disabled {
-    background-color: lightgray;
-    color: #fff;
-}
-
-.score {
-    color: yellow;
-}
-
-.borderBottom {
-    border-bottom: 2px solid #fff;
 }
 
 #hint-btn:disabled {
-    background-color: lightgray;
+    background-color: #d3d3d3;
     border: lightgray;
     color: #fff;
-}
-
-.text-bold {
-    font-weight: 700;
-}
-
-h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-family: 'Oswald', sans-serif;
-}
-
-footer {
-    margin-top: 1%;
-    color: white;
 }
 
 .playAgainBtn {
     margin: 1em 1em;
 }
 
-img {
-    /* float: left; */
-    width: 20%;
-    margin-bottom: 1em;
-}
-
-.noShow {
-    display: none;
-}
-
-/* .text-position {
-    position: relative;
-    top: 30px;
-    right: 30px;
-
-} */
-
 footer {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: blue;
+    color: #000;
+    background-color: #fff;
 }
 

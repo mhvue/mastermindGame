@@ -102,8 +102,8 @@ $("#reset-btn").on("click", function() {
 });
 
 //play again button on modal 
-$(".playAgainBtn").on("click", function(event) {
-    event.preventDefault();
+$(".playAgainBtn").on("click", function() {
+    
     //start generated random number again by calling api
     randomNum();
 
@@ -116,10 +116,30 @@ $(".playAgainBtn").on("click", function(event) {
     $(".historyHolder").html("");
 });
 
+//clear form when clicked on 
+$("input").click(function() {
+    $("input").val(" ");
+});
+
+//hint - can only hit once
+$("#hint-btn").click(function() {
+   //show a number randomly btwn 0-3 based on index but not location, to show value to user
+   const randomIndex =  Math.floor((Math.random() * 3) + 0);
+   const hintImg = $("<img src='./images/hint.jpg' alt= 'hint word on keyboard' >");
+   const hintMsg = $("<h5>").text(`It contains ${newNum[randomIndex]}`);
+
+   //show modal with hint
+   $(".modal-title").removeClass("intro-title almost-title gameOver-title  correct-title try-title").addClass("hint-title");
+   messageModal(hintMsg, hintImg);
+   $(".playAgainBtn").hide();
+   $("#hint-btn").prop("disabled", true);
+});
+
+
 
 //user presses submit button 
 $("#submitBtn").click(function(){
-    //event.preventDefault();
+ 
     let checker = [];
     let incorrectArr = []; 
     let containsArr =[];
@@ -150,9 +170,6 @@ $("#submitBtn").click(function(){
         return messageModal("Numbers bigger than 7 detected. Please input 0-7.");
     }
 
-  
-
- 
   //compared enteredNum values to genreatedNum values. 
     for(let i = 0; i < splitUserNum.length; i++){     
 
@@ -254,23 +271,5 @@ $("#submitBtn").click(function(){
 });
 
 
-//clear form when clicked on 
-$("input").click(function() {
-    $("input").val(" ");
-});
-
-//hint - can only hit once
-$("#hint-btn").click(function() {
-   //show a number randomly btwn 0-3 based on index but not location, to show value to user
-   const randomIndex =  Math.floor((Math.random() * 3) + 0);
-   const hintImg = $("<img src='./images/hint.jpg' alt= 'hint word on keyboard' >");
-   const hintMsg = $("<h5>").text(`It contains ${newNum[randomIndex]}`);
-
-   //show modal with hint
-   $(".modal-title").removeClass("intro-title almost-title gameOver-title  correct-title try-title").addClass("hint-title");
-   messageModal(hintMsg, hintImg);
-   $(".playAgainBtn").hide();
-   $("#hint-btn").prop("disabled", true);
-});
 
 
