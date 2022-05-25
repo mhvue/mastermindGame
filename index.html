@@ -25,7 +25,7 @@
     <div class="container">
         <div class="row"> 
             <div class="col"><h1>Mastermind Game</h1></div>
-            <h4 class="score text-center">Your Score: <span class="scoreBoard">0</span></h4>
+            <h3 class="score text-center">Score: <span class="scoreBoard">0</span></h3>
        </div>
    
         <!--this row splits in half, 1 containing info, the 2nd the guesses and feedback-->
@@ -40,12 +40,13 @@
                     <li>It is a 4 number combination from <span class="text-bold">0-7.</span> (ex: 1234,4567,6765 ..etc) *duplicate numbers may exist*</li>
                     <li>You get <span class="text-bold">10 attempts</span> to guess the 4 number combination </li>
                     <li>Number needs to be in <span class="text-bold">placement</span>.
-                         If have correct number but <span class="text-italic">incorrect placement</span>
-                         , you will be informed of so
-                        (ex: if numbers should be 1234 but you input 1324, that's incorrect)</li>
-                    <li>You can view your past guesses and feedback</li>
-                    <li>You only get 1 hint</li>
-                    <li>If you haven't play Mastermind, the board game, before, click <a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)" target="_blank">here</a></li>
+                         If number is in the<span class="text-italic"> incorrect placement</span>
+                         but you inputted the correct numbers, you will be informed of so.
+                        (ex: if answer is 1234 but you input 1324, that's incorrect)</li>
+                    <li>You can view your past guesses and feedback. </li>
+                    <li>You have 2 hints.</li>
+                    <li>If you haven't play Mastermind(the board game) before and want more informaton
+                         click <a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)" target="_blank">here</a></li>
                 </ul>
             </div>
             <div class="col guessesContainer borderBottom">
@@ -62,7 +63,8 @@
             <div class="row">
                 <div class="col">
                 <!--number of attempts here-->
-                    <h3 class="text-center remaining-info">Your Remaining Attempts: <span id="guess-num">10</span></h3>
+                    <h3 class="text-center remaining-info">Remaining Attempts: <span id="guess-num">10</span></h3>
+                    <h3 class=" hint-header text-center">Hint:<span class="hint-num"> 2</span></h3>
                     <h3 class="hint-text">Need a Hint? Hit the Hint button</h3>
                 <!-- form to input numbers -->
                 <!-- help from stackOverflow on making sure form doesn't refresh after hitting enter-->
@@ -101,6 +103,7 @@
         </div>
         <div class="text-center">
             <button type="button" class="btn btn-success playAgainBtn">Play Again</button>
+            <button type="button" class="btn btn-warning resetHint">Hint</button>
        </div>
       </div>
     </div>

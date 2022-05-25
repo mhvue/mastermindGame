@@ -4,7 +4,8 @@ let checker = [];
 let containsNum= false;
 let count = 10;
 let score = 0;
-
+let hintClick = 2;
+let hintArr = "";
 /**
  * function randomNum
  * @returns generated numbers from api
@@ -21,12 +22,13 @@ function randomNum () {
         
         generatedNum.push(num);
         newNum = generatedNum.join().split("");
-        console.log(newNum)
+        //console.log(newNum)
     
         //show reset button, hint button active and hite play again button on modal
         $("#reset-btn").text("Reset");
         $("#hint-btn").prop("disabled", false);
-        $(".playAgainBtn").hide();
+        $(".playAgainBtn, .resetHint").hide();
+       
     });
 
     return runNum;
@@ -70,7 +72,7 @@ function countDown() {
             $(".hint-text").hide();
             break;
         case 0:
-            $(".modal-title").removeClass("intro-title try-title almost-title correct-title hint-title").addClass("gameOver-title");
+            $(".modal-title").removeClass("try-title almost-title correct-title hint-title").addClass("gameOver-title");
             messageModal(`The answer was ${newNum.join("")}`);
             $(".playAgainBtn").show();
             $("#submitBtn, #hint-btn").each(function() {
@@ -102,25 +104,25 @@ function closeToAnswer (value) {
     const almostImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
    
      //pop up message to show user they are close to guessing correct answer 
-     $(".modal-title").removeClass("intro-title try-title gameOver-title correct-title hint-title")
+     $(".modal-title").removeClass("try-title gameOver-title correct-title hint-title")
      .addClass("almost-title");
 
      switch(checker.length || checker.length && containsNum){
          case 0 || 0 && true:
-            appendInfo(value, " Some correct numbers. Incorrect positions.")
-            messageModal("You got some correct numbers but incorrect positions of those numbers.", almostImg)
+            appendInfo(value, " Some correct numbers. Incorrect placements.")
+            messageModal("Contains correct numbers. Incorrect placements.", almostImg)
             break;
         case 1 || 1 && true:
             appendInfo(value, " One correct number.")
-            messageModal("One number correct in correct position.", almostImg)
+            messageModal("One number correct in correct placements.", almostImg)
             break;
         case 2|| 2 && true:
             appendInfo(value, " Two correct numbers.")
-            messageModal("Two number correct in correct positions.", almostImg)
+            messageModal("Two number correct in correct placements.", almostImg)
             break;
         case 3|| 3 && true:
             appendInfo(value," Three correct numbers.") 
-            messageModal("Three number correct in correct position.", almostImg)
+            messageModal("Three number correct in correct placements.", almostImg)
         default:
             break;
     }
@@ -165,18 +167,43 @@ $("input").click(function() {
     $("input").val(" ");
 });
 
-//hint - can only hit once
-$("#hint-btn").click(function() {
+//hint - give two hints 
+$("#hint-btn, .resetHint").click(function() {
    //show a number randomly btwn 0-3 based on index but not location, to show value to user
-   const randomIndex =  Math.floor((Math.random() * 3) + 0);
+   const randomIndex =  Math.floor((Math.random() * 4) + 0)
    const hintImg = $("<img src='./images/hint.jpg' alt= 'hint word on keyboard' >");
-   const hintMsg = $("<h5>").text(`It contains ${newNum[randomIndex]}`);
-   
-   //show modal with hint
-   $(".modal-title").removeClass("intro-title almost-title gameOver-title  correct-title try-title").addClass("hint-title");
+   let hintMsg;
+  
+   hintClick--;
+   hintArr += randomIndex;
+    $(".hint-num").text(" " + hintClick)
+   $(".modal-title").removeClass("almost-title gameOver-title correct-title try-title").addClass("hint-title");
+
+   if(hintClick === 1){
+    hintMsg = $("<h5>").html(`It contains ${newNum[randomIndex]}`)
+       //show modal with hint
    messageModal(hintMsg, hintImg);
    $(".playAgainBtn").hide();
-   $("#hint-btn").prop("disabled", true);
+   }
+   
+   //rule out the possibility of getting same random index 
+   else if(hintClick === 0 && randomIndex.toString() !== hintArr[0]){
+     const hintNum1 = newNum[randomIndex];
+     const hintNum2 = newNum[hintArr[0]]
+
+     //checking for possibility of duplicate value in newNum
+    if(hintNum1 !== hintNum2){
+        hintMsg = $("<h5>").html(`Second Hint: It contains ${newNum[randomIndex]}`)
+    } else {
+        hintMsg = $("<h5>").html(`Second Hint: It contains duplicates`)
+     
+    }
+    $("#hint-btn").prop("disabled", true);
+        //show modal with hint
+    messageModal(hintMsg, hintImg);
+    $(".playAgainBtn").hide();
+     }
+    
 });
 
 //user presses submit button 
@@ -258,6 +285,10 @@ $("#submitBtn").click(function(){
         $("#submitBtn, #hint-btn").each(function() {
             $(this).prop("disabled", true)
         });
+
+        $("#submitBtn").each(function() {
+            $(this).prop("disabled", true)
+        });
         enteredNum.length = 0;
     }
     //incorrrect answers
@@ -289,8 +320,7 @@ $("#submitBtn").click(function(){
         
         closeToAnswer(almostVal, almostMsg);
 
-        //reset arrays and keep counting down
-        // checker = [];
+        //reset arrays and keep counting down;
         enteredNum.length = 0;
         countDown();
     
@@ -301,13 +331,14 @@ $("#submitBtn").click(function(){
 $(".feedbackHelper").click(function(){
       
     const div = $("<div>")
-    const explainInfo =  $("<p>").text("Some numbers correct. Can't say how many numbers.").addClass("text-bold-none")
+    const explainInfo =  $("<p>").text("Your input contains correct numbers but they are not in the correct positions.")
+                                 addClass("text-bold-none")
     const explainInfo2 = $("<p>").text("Two numbers correct and it's in the correct positions.").addClass("text-bold-none")
     const explainInfo3 = $("<p>").text("Three numbers correct and it's in the correct positions.").addClass("text-bold-none")
 
-     const someCorr  = $("<p>").text("Some correct numbers. Incorrect positions").addClass("text-bold")
-     const twoCorr = $("<p>").text("Two correct numbers").addClass("text-bold")
-     const threeCorr = $("<p>").text("Three correct numbers").addClass("text-bold")
+    const someCorr  = $("<p>").text("Some correct numbers. Incorrect positions").addClass("text-bold")
+    const twoCorr = $("<p>").text("Two correct numbers").addClass("text-bold")
+    const threeCorr = $("<p>").text("Three correct numbers").addClass("text-bold")
 
       const explainSomeCorrect = div.append(
           someCorr.append(explainInfo),

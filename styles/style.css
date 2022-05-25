@@ -51,6 +51,10 @@ img {
     display: none;
 }
 
+.hint-header {
+    color: #E1AD01;
+}
+
 
 .rules {
     list-style-type: circle ;
@@ -61,7 +65,7 @@ img {
 }
 
 .score {
-    color: yellow;
+    color: #98FB98;
 }
 
 .text-bold {
@@ -119,7 +123,7 @@ img {
     color: #fff;
 }
 
-.playAgainBtn {
+.playAgainBtn, .resetHint {
     margin: 1em 1em;
 }
 
