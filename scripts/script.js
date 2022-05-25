@@ -11,7 +11,7 @@ let score = 0;
  */
 function randomNum () {
    
-    return $.ajax({
+    const runNum =  $.ajax({
         url: "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new",
         method: "GET"
     }).then(function(response){
@@ -27,7 +27,9 @@ function randomNum () {
         $("#reset-btn").text("Reset");
         $("#hint-btn").prop("disabled", false);
         $(".playAgainBtn").hide();
-    })
+    });
+
+    return runNum;
 };
 randomNum();
 
