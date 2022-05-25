@@ -6,6 +6,7 @@ let count = 10;
 let score = 0;
 let hintClick = 2;
 let hintArr = "";
+
 /**
  * function randomNum
  * @returns generated numbers from api
@@ -351,7 +352,7 @@ $(".feedbackHelper").click(function(){
       
     const div = $("<div>")
     const explainInfo =  $("<p>").text("Your input contains correct numbers but they are not in the correct positions.")
-                                 addClass("text-bold-none")
+                                 .addClass("text-bold-none")
     const explainInfo2 = $("<p>").text("Two numbers correct and it's in the correct positions.").addClass("text-bold-none")
     const explainInfo3 = $("<p>").text("Three numbers correct and it's in the correct positions.").addClass("text-bold-none")
 
@@ -366,7 +367,7 @@ $(".feedbackHelper").click(function(){
           )
 
         $(".modal-title").removeClass(" almost-title gameOver-title correct-title hint-title try-title").addClass("info-title")
-        $(".info-title").text("Info")
+        $(".info-title").text("Feedback Info")
         $(".playAgainBtn").hide();
 
      messageModal(
