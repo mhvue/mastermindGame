@@ -22,12 +22,12 @@ function randomNum () {
         
         generatedNum.push(num);
         newNum = generatedNum.join().split("");
-        //console.log(newNum)
+        console.log(newNum)
     
         //show reset button, hint button active and hite play again button on modal
         $("#reset-btn").text("Reset");
         $("#hint-btn").prop("disabled", false);
-        $(".playAgainBtn, .resetHint").hide();
+        $(".playAgainBtn").hide();
        
     });
 
@@ -168,7 +168,7 @@ $("input").click(function() {
 });
 
 //hint - give two hints 
-$("#hint-btn, .resetHint").click(function() {
+$("#hint-btn").click(function() {
    //show a number randomly btwn 0-3 based on index but not location, to show value to user
    const randomIndex =  Math.floor((Math.random() * 4) + 0)
    const hintImg = $("<img src='./images/hint.jpg' alt= 'hint word on keyboard' >");
@@ -176,21 +176,25 @@ $("#hint-btn, .resetHint").click(function() {
   
    hintClick--;
    hintArr += randomIndex;
-    $(".hint-num").text(" " + hintClick)
-   $(".modal-title").removeClass("almost-title gameOver-title correct-title try-title").addClass("hint-title");
 
+   $(".hint-num").text(" " + hintClick)
+   $(".modal-title").removeClass("almost-title gameOver-title correct-title try-title").addClass("hint-title");
+  
    if(hintClick === 1){
     hintMsg = $("<h5>").html(`It contains ${newNum[randomIndex]}`)
-       //show modal with hint
-   messageModal(hintMsg, hintImg);
-   $(".playAgainBtn").hide();
+
+    //show modal with hint
+    messageModal(hintMsg, hintImg);
+    $(".playAgainBtn").hide();
    }
+   
    
    //rule out the possibility of getting same random index 
    else if(hintClick === 0 && randomIndex.toString() !== hintArr[0]){
      const hintNum1 = newNum[randomIndex];
      const hintNum2 = newNum[hintArr[0]]
 
+     console.log(hintNum1,hintNum2)
      //checking for possibility of duplicate value in newNum
     if(hintNum1 !== hintNum2){
         hintMsg = $("<h5>").html(`Second Hint: It contains ${newNum[randomIndex]}`)
@@ -198,11 +202,26 @@ $("#hint-btn, .resetHint").click(function() {
         hintMsg = $("<h5>").html(`Second Hint: It contains duplicates`)
      
     }
+
     $("#hint-btn").prop("disabled", true);
-        //show modal with hint
+    //show modal with hint
     messageModal(hintMsg, hintImg);
     $(".playAgainBtn").hide();
-     }
+  
+    }
+else if(hintClick === 0 && randomIndex.toString() === hintArr[0]){
+       const randomIndexAgain= Math.floor((Math.random() * 4) + 0)
+
+        hintMsg = $("<h5>").html(`Second Hint: It contains ${newNum[randomIndexAgain]}`)
+        messageModal(hintMsg, hintImg);
+        $("#hint-btn").prop("disabled", true);
+
+        //show modal with hint
+        messageModal(hintMsg, hintImg);
+        $(".playAgainBtn").hide();
+    }
+
+     
     
 });
 
