@@ -38,9 +38,10 @@
                 <h5>Rules</h5>
                 <ul class="rules">
                     <li>It is a 4 number combination from <span class="text-bold">0-7.</span> (ex: 1234,4567,6765 ..etc) *duplicate numbers may exist*</li>
-                    <li>You get 10 attempts to guess the 4 number combination </li>
-                    <li>Number needs to be in correct placement. </li>
-                    <li>If you guess the corret numbers, but wrong placment, you will be informed of so
+                    <li>You get <span class="text-bold">10 attempts</span> to guess the 4 number combination </li>
+                    <li>Number needs to be in <span class="text-bold">placement</span>.
+                         If have correct number but <span class="text-italic">incorrect placement</span>
+                         , you will be informed of so
                         (ex: if numbers should be 1234 but you input 1324, that's incorrect)</li>
                     <li>You can view your past guesses and feedback</li>
                     <li>You only get 1 hint</li>
@@ -49,10 +50,11 @@
             </div>
             <div class="col guessesContainer borderBottom">
                 <div class="history">
-                    <h3>Your Guesses:</h3>
+                    <h3>Your Guesses:</h3> 
+                    <span class="text-italic">confused on the feedback? click <a class="feedbackHelper">here</a></span>
                     <br>
-                    <ul class="historyHolder">
-                    </ul>
+                    <ol class="historyHolder">
+                    </ol>
                 </div>
             </div>
 
@@ -61,7 +63,7 @@
                 <div class="col">
                 <!--number of attempts here-->
                     <h3 class="text-center remaining-info">Your Remaining Attempts: <span id="guess-num">10</span></h3>
-                
+                    <h3 class="hint-text">Need a Hint? Hit the Hint button</h3>
                 <!-- form to input numbers -->
                 <!-- help from stackOverflow on making sure form doesn't refresh after hitting enter-->
                     <!-- <form action="javascript:void(0);">  -->

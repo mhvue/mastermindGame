@@ -3,5 +3,3 @@ Hello! Welcome to my version of Mastermind. Haven't played Mastermind before? He
 
 ## How to play:
 Click the following link to play: https://mhvue.github.io/mastermindGame/ 
-
-

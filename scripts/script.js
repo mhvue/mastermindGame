@@ -1,10 +1,12 @@
 let enteredNum = [];
 let newNum = [];
+let checker = [];
+let containsNum= false;
 let count = 10;
 let score = 0;
 
 /**
- * function randomNum 
+ * function randomNum
  * @returns generated numbers from api
  */
 function randomNum () {
@@ -20,10 +22,7 @@ function randomNum () {
         generatedNum.push(num);
         newNum = generatedNum.join().split("");
         console.log(newNum)
-        //pop up message to welcome user
-        $(".modal-title").addClass("intro-title");
-        messageModal("Let's Play! Guess the 4 number combination.")
-
+    
         //show reset button, hint button active and hite play again button on modal
         $("#reset-btn").text("Reset");
         $("#hint-btn").prop("disabled", false);
@@ -41,7 +40,6 @@ function messageModal (message, image){
     image = image || "";
 
     $(".modal").modal("show")
-    $(".intro-title").text("Welcome!");
     $(".try-title").text("Try Again");
     $(".gameOver-title").text("Game Over");
     $(".almost-title").text("Almost");
@@ -61,28 +59,72 @@ function countDown() {
     count--;
     $("#guess-num").text(count);
 
-    //halfway count
-    if(count === 5) {
-        $("#guess-num").css("color", "#FF0000");
-    }
-
-    //game over
-    if(count === 0){
-       
-        $(".modal-title").removeClass("intro-title try-title almost-title correct-title hint-title").addClass("gameOver-title");
-        messageModal(`The answer was ${newNum.join("")}`);
-        $(".playAgainBtn").show();
-        $("#submitBtn, #hint-btn").each(function() {
-            $(this).prop("disabled", true)
-        });
-        $("#reset-btn").text("Play Again");
-        $("#guess-num").css("color", "#fff");
-        score = 0
+    switch(count){
+        case 5: 
+            $("#guess-num").css("color", "#FF0000");
+            $("#hint-btn").attr("disabled") ?  $("hint-text").hide() : $(".hint-text").show().css("color", "#E1AD01").addClass("text-center")
+            break;
+        case 4: 
+            $(".hint-text").hide();
+            break;
+        case 0:
+            $(".modal-title").removeClass("intro-title try-title almost-title correct-title hint-title").addClass("gameOver-title");
+            messageModal(`The answer was ${newNum.join("")}`);
+            $(".playAgainBtn").show();
+            $("#submitBtn, #hint-btn").each(function() {
+                $(this).prop("disabled", true)
+            });
+            $("#reset-btn").text("Play Again")
+            $("#guess-num").css("color", "#fff");
+            score = 0
+            break;
+        default: 
+            break;
     }
 };
 
 
+/**
+ * function appendInfo appends history of feedback and previous guesses 
+ * @param {string of number} n 
+ * @param {string} feedback 
+ */
+ function appendInfo (n, feedback){
+    let historyList= $("<li>").addClass("historyItem").append([n, feedback]).addClass("almost-text");
+    $(".historyHolder").append(historyList); 
+    checker = [];
+}
 
+
+function closeToAnswer (value) {
+    const almostImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
+   
+     //pop up message to show user they are close to guessing correct answer 
+     $(".modal-title").removeClass("intro-title try-title gameOver-title correct-title hint-title")
+     .addClass("almost-title");
+
+     switch(checker.length || checker.length && containsNum){
+         case 0 || 0 && true:
+            appendInfo(value, " Some correct numbers. Incorrect positions.")
+            messageModal("You got some correct numbers but incorrect positions of those numbers.", almostImg)
+            break;
+        case 1 || 1 && true:
+            appendInfo(value, " One correct number.")
+            messageModal("One number correct in correct position.", almostImg)
+            break;
+        case 2|| 2 && true:
+            appendInfo(value, " Two correct numbers.")
+            messageModal("Two number correct in correct positions.", almostImg)
+            break;
+        case 3|| 3 && true:
+            appendInfo(value," Three correct numbers.") 
+            messageModal("Three number correct in correct position.", almostImg)
+        default:
+            break;
+    }
+        
+
+}
 //reset to run randomNum, enabled submit btn, restart count, clear guesses
 $("#reset-btn").on("click", function() {
     //pop up msg to show the correct answer and offer to replay 
@@ -127,7 +169,7 @@ $("#hint-btn").click(function() {
    const randomIndex =  Math.floor((Math.random() * 3) + 0);
    const hintImg = $("<img src='./images/hint.jpg' alt= 'hint word on keyboard' >");
    const hintMsg = $("<h5>").text(`It contains ${newNum[randomIndex]}`);
-
+   
    //show modal with hint
    $(".modal-title").removeClass("intro-title almost-title gameOver-title  correct-title try-title").addClass("hint-title");
    messageModal(hintMsg, hintImg);
@@ -135,21 +177,17 @@ $("#hint-btn").click(function() {
    $("#hint-btn").prop("disabled", true);
 });
 
-
-
 //user presses submit button 
 $("#submitBtn").click(function(){
  
-    let checker = [];
     let incorrectArr = []; 
-    let containsArr =[];
     let splitUserNum;
     const checkRegEx = /^[0-7]+$/; //with the help from stackOverflow
     const checkLetters = /^[A-Za-z]+$/
    
     //get the number from user and push into enteredNumArr 
     const userNum= $(".numHolder").val().trim();
-
+    console.log(userNum)
     $(".playAgainBtn").prop("disabled",false);
     $(".playAgainBtn").hide();
 
@@ -162,25 +200,27 @@ $("#submitBtn").click(function(){
     else if(userNum.length > 4 || userNum.length <= 3 || userNum.match(checkLetters)) { 
         $(".modal-title").removeClass("intro-title almost-title gameOver-title correct-title hint-title").addClass("try-title");
         return messageModal("Please input 4 numbers.");
-   }
-   
+   } 
     else{
         //input of numbers bigger than 7
-        console.log("false")
-        return messageModal("Numbers bigger than 7 detected. Please input 0-7.");
+        $(".modal-title").removeClass("intro-title almost-title gameOver-title correct-title hint-title").addClass("try-title");
+        return messageModal("Please input numbers 0-7.");
     }
+
 
   //compared enteredNum values to genreatedNum values. 
     for(let i = 0; i < splitUserNum.length; i++){     
 
         //if number entered by user (now splitUserNum) equals elements in generatedNum (now as newNum)
-       if(splitUserNum[i] === newNum[i]){
-          checker.push(splitUserNum[i])
+       if(splitUserNum[i] === newNum[i] ){ //correct number and loc 
+           checker.push(splitUserNum[i])
         }
+
         //user input the num already verified as correct, but in combination with differ incorrect numbers
         else if(splitUserNum.includes(newNum[i])){
-            containsArr.push(newNum[i])
+           containsNum = true;
         }
+        
         else {
             //push the non matched numbers to incorrectArr
             incorrectArr.push(splitUserNum[i])
@@ -212,7 +252,7 @@ $("#submitBtn").click(function(){
         $(".playAgainBtn").show();
 
         //disable submit btn and hint btn as game is over. clear array containing what user input to play again(if user chose to)
-        $("#reset-btn").text("Play Again").addClass(".playAgainBtn");
+        $("#reset-btn").text("Play Again").addClass("playAgainBtn");
         $("#submitBtn, #hint-btn").each(function() {
             $(this).prop("disabled", true)
         });
@@ -239,37 +279,46 @@ $("#submitBtn").click(function(){
 
    }
    //correct numbers but incorrect position
-    else if(checker.length <= 3 || containsArr.length <= 3){
-      
-        const almostVal = splitUserNum.join("");
+    else if(checker.length <= 3 || containsNum === true){
+        console.log(checker)
+         const almostVal = splitUserNum.join("");
         const almostImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
-        const almostMsg = $("<span> You are close! Keep trying. </span>").addClass("text-position");
-        const historyList= $("<li>").addClass("historyItem").append(`${almostVal} `).append("<span>Almost.</span>");
+        let almostMsg = $("<span>").html("You are close! Keep trying").addClass("text-position");
         
-        //pop up message to show user they are close to guessing correct answer 
-        $(".modal-title").removeClass("intro-title try-title gameOver-title correct-title hint-title")
-                          .addClass("almost-title");
-        messageModal(almostMsg, almostImg);
-
-         //show user their guesses and history of their guesses with feedback
-        $(".historyHolder").append(historyList); 
-
-        //look at checker length to provide hint to user
-        if(checker.length === 2 || containsArr.length === 2){
-            $(".modal-title").removeClass("intro-title try-title gameOver-title correct-title hint-title")
-                          .addClass("almost-title");
-            messageModal("You got two numbers correct. Keep going!")
-        }
+        closeToAnswer(almostVal, almostMsg);
 
         //reset arrays and keep counting down
-        checker = [];
+        // checker = [];
         enteredNum.length = 0;
-        containsArr.length = 0;
         countDown();
     
    }
 });
 
+//help explain feedback 
+$(".feedbackHelper").click(function(){
+      
+    const div = $("<div>")
+    const explainInfo =  $("<p>").text("Some numbers correct. Can't say how many numbers.").addClass("text-bold-none")
+    const explainInfo2 = $("<p>").text("Two numbers correct and it's in the correct positions.").addClass("text-bold-none")
+    const explainInfo3 = $("<p>").text("Three numbers correct and it's in the correct positions.").addClass("text-bold-none")
 
+     const someCorr  = $("<p>").text("Some correct numbers. Incorrect positions").addClass("text-bold")
+     const twoCorr = $("<p>").text("Two correct numbers").addClass("text-bold")
+     const threeCorr = $("<p>").text("Three correct numbers").addClass("text-bold")
 
+      const explainSomeCorrect = div.append(
+          someCorr.append(explainInfo),
+          twoCorr.append( explainInfo2),
+          threeCorr.append( explainInfo3),
+          )
 
+        $(".modal-title").removeClass(" almost-title gameOver-title correct-title hint-title try-title").addClass("info-title")
+        $(".info-title").text("Info")
+        $(".playAgainBtn").hide();
+
+     messageModal(
+         explainSomeCorrect 
+     )
+
+})

@@ -43,6 +43,14 @@ img {
     margin-bottom: 1em;
 }
 
+.almost-text {
+    color: green;
+}
+
+.hint-text {
+    display: none;
+}
+
 
 .rules {
     list-style-type: circle ;
@@ -60,7 +68,15 @@ img {
     font-weight: 700;
 }
 
-.remaining-info {
+.text-bold-none {
+    font-weight: 100;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.remaining-info, .hint-text{
     margin-top: 1em;
     color: white;
 }
