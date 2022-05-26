@@ -41,7 +41,8 @@ I added a Reset Button just in case a user no longer wanted to continue playing 
 * If you feel you need to start over with a new game, click on Reset Game
 
 ## How you can get started
-1. Clone this repository <code><pre> https://github.com/mhvue/mastermindGame.git </code></pre>
+1. Clone this repository 
+<code><pre> https://github.com/mhvue/mastermindGame.git </code></pre>
 2. Open in your code editor the cloned repo. I am using Visual Studio Code (VSC).
 3. Right click in index.html and find _Open in Default Browser_ to open in your preferred default browser.
 4. It opens on local machine.
@@ -49,45 +50,44 @@ I added a Reset Button just in case a user no longer wanted to continue playing 
 
 
 ## Extensions 
-* Modals showing to display feedback to user for:
+* Modals display feedback to user for:
     * Incorrect Answer 
     * Correct Answer
     * Almost correct answer - means the guess does contan the correct number(s) but incorrect placement of those numbers. 
     * If two numbers are correct and in correct placements.
     * If three numbers are corret and in correct placements.
-    * With correct answer if user does not guess correct numbers by 10 attempts.
-    * With correct answer if user decides to Reset to a new game.
+    * If user does not guess correct numbers by 10 attempts, it display correct answer.
+    * If user decides to Reset to a new game, it display correct answer.
     * Loading messaage if user decides on new game.
-* Validation on input of numbers 
+* Validation of numbers entered
     * Modal shows for incorrect type of characters (i.e. abcd, ABCD, *&^%).
     * Modal shows for incorrect amount of characters (i.e. 1234567, 12, 1).
     * Modal shows for no input of numbers from users.
 * Reset button
-    * Offer a Reset button in case user decides to try a new combination of numbers 
-    * Modal will show the answer with button to play again. 
+    * A Reset button in case user decides to try a new combination of numbers 
+    * When clicked on, modal will show the answer with button to play again. 
     * If user accidently clicks outside the modal, by clicking on Play Again button sitting next to Hint button, the same modal will show again.
-    * Hint button and Submit button is disabled to not allow any more inputs when Reset button clicked.  Past Guesses field is emptied to ready for next game. 
+    * When clicked on, the Hint button and Submit button is disabled to not allow any more inputs.  Past Guesses field is emptied to ready for next game. 
 * Play Again button
     * Will start game over again and generate new combinations of numbers.
-    * This button is shown if player decides to reset game by click on Reset button, triggering modal with this button
+    * This button is shown if player decides to reset game by click on Reset button, triggering modal with this button.
     * This button is shown once guesses correct combination of numbers, triggering modal with this button. 
-    * If user accidently clicks outside the modal, by clicking on Play Again button sitting next to Hint button, the same modal will show again.
+    * If user accidently clicks outside the modal, by clicking on Play Again button, it will restart the game.
 * Hint Button 
     * After Score reaches 5, computer will offer if user wants to use Hint button, if not used already.
     * When clicked on, modal revealing one of the numbers, but not the number's location. 
     * By luck, the modal might reveal that there are duplicate numbers, but will not say which number.
     * Hint can only be used twice. 
-    * Since Hint can only be used twice, the button will disable so user cannot click it again. 
-* Hint 
+    * After being used twice, the button will disable so user cannot click it again. 
+* Hint displayed 
     * Number of hints is shown and goes down as user uses the Hint.
 * Ding Ding for Correct Answer 
-    * Sound for correct answer 
+    * Sound of a bell when user guesses correct answer. 
 * Images on Modal 
-    * X image for incorrect answers (no correct numbers) and answer with some correct numbers but wrong placement. 
-    * Thumbs up image for correct answer. 
+    * Images used for in modal with feedback.
 * Score
-    * Score is shown, which starts at 0 and goes up by 1 per correct answer 
+    * Score is shown, which starts at 0 and goes up by 1 per correct answer. 
 * Attempts
-    * Attempts is shown, which starts at 10 and goes down by 1 per incorrect answer 
-* The attempted numbers that are close to answer with the feedback will be in green
-    * This is to help user find their previous attempts to make next best guess
+    * Attempts is shown, which starts at 10 and goes down by 1 per incorrect answer.
+* Your Guesses have feedback in Green
+    * This is to help user find their previous attempts that is close to answer, to make next best guess.
