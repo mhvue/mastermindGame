@@ -9,7 +9,7 @@ let hintArr = "";
 
 /**
  * function randomNum
- * @returns generated numbers from api
+ *  generated numbers from api
  */
  function randomNum () {
    
@@ -24,13 +24,12 @@ let hintArr = "";
         if(response){
             $(".modal").modal("hide")
             generatedNum.push(num);
-        newNum = generatedNum.join().split("");
-        console.log(newNum)
-    
-        //show reset button, hint button active and hite play again button on modal
-        $("#reset-btn").text("Reset");
-        $("#hint-btn").prop("disabled", false);
-        $(".playAgainBtn").hide();
+            newNum = generatedNum.join().split("");
+        
+            //show reset button, hint button active and hite play again button on modal
+            $("#reset-btn").text("Reset");
+            $("#hint-btn").prop("disabled", false);
+            $(".playAgainBtn").hide();
         }
       
     });
@@ -56,9 +55,10 @@ function messageModal (message, image){
 }
 
 /**
- * function countDown is for when count goes down
+ * function countDown u=
+ * starting at 5, hint text shows to remind to use hint, if not done so.
  * when count reaches 0, game is over. modals pops up informing of so.
- * everything resets (score, feedback gone, count, hint)
+ * everything resets (score, feedback gone, count, hint,disable submit buttons..etc)
  *  button to play again shows up.
  */
 function countDown() {
@@ -71,7 +71,7 @@ function countDown() {
             $("#hint-btn").attr("disabled") ?  $("hint-text").hide() : $(".hint-text").show().css("color", "#E1AD01").addClass("text-center")
             break;
         case 4: 
-            $(".hint-text").hide();
+            $(".hint-text").hide(); 
             break;
         case 0:
             $(".modal-title").removeClass("try-title almost-title correct-title hint-title").addClass("gameOver-title");
@@ -136,7 +136,7 @@ function closeToAnswer (value) {
 }
 
 /**
- * function appendHint will show the hints 
+ * function appendHint will show the hints message in modal.
  * @param {number} randomIndex 
  */
 
@@ -162,17 +162,16 @@ function appendHint(randomIndex) {
     messageModal(hintMsg, hintImg);
 };
 
-//reset to run randomNum, enabled submit btn, restart count, clear guesses
+//reset to run randomNum, enabled submit btn, restart count, clear guesses history
 $("#reset-btn").on("click", function() {
 
+    //this for when user WINS game. data attr added to reset button, so that it allows to restart game
     if($(this).attr("data-win")){
-        console.log("hereeeeee")
+        
         $(".modal-title").removeClass("try-title almost-title correct-title hint-title").addClass("gameOver-title")
         randomNum();
-        console.log('start again')
         messageModal("Loading...");
         $(".playAgainBtn").hide()
-        //start count at 10 again 
         count = 10;
         hintClick = 2;
 
@@ -184,14 +183,14 @@ $("#reset-btn").on("click", function() {
         $(".historyHolder").html(""); 
         $(".hint-num").text(hintClick);
 
-    }else {
-    console.log("not here")
+    }
+    //else is only for clicking on reset button
+    else {
     //pop up msg to show the correct answer and offer to replay 
     $(".modal-title").removeClass("try-title almost-title correct-title hint-title").addClass("gameOver-title");
     messageModal(`The answer was ${newNum.join("")} Hit Play Again button to play again`);
-    $(".playAgainBtn").show()
+    $(".playAgainBtn").show();
 
-    //start count at 10 again 
     count = 10;
     hintClick = 2;
 
@@ -206,12 +205,9 @@ $("#reset-btn").on("click", function() {
 
 //play again button on modal 
 $(".playAgainBtn").on("click", function() {
-    
-
     //start generated random number again by calling api
      randomNum()
    
-    //start count at 10 again 
     count = 10;
     hintClick  = 2;
 
@@ -294,7 +290,6 @@ $("#submitBtn").click(function(event){
         return messageModal("Please input numbers 0-7.");
     }
 
-
   //compared enteredNum values to genreatedNum values. 
     for(let i = 0; i < splitUserNum.length; i++){     
 
@@ -324,7 +319,6 @@ $("#submitBtn").click(function(event){
 //messages to user
     //correct answers
     if(checker.length === 4) {
-        console.log("ehre", checker)
         const correctImg = $("<img src='./images/correctBtn.svg' alt= 'red box with white x' >");
         const correctMsg = $("<h5> You got all the numbers correct. Play Again?</h5>");
         const winSound = new Audio("./other/win_bell.wav");
@@ -355,7 +349,6 @@ $("#submitBtn").click(function(event){
     }
     //incorrrect answers 
     else if(incorrectArr.length === 4){
-        console.log(incorrectArr)
         const incorrectVal = incorrectArr.join("");
         const tryAgainImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
         const tryAgainMsg = $("<span> No Match </span>").addClass("text-position");
