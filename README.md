@@ -7,10 +7,23 @@ In this game, I wanted to keep users engaged. Even though this is user vs. compu
 
 I wanted to add an option to contact me via email for questions or feedback on game as I always welcome feedback.
 
-## Structure of code 
+## My Thought Process and Structure of Code 
 You will see in this codebase, I used Bootstrap. I like Bootstrap for their Grid system and rows and columns. I also like Bootstrap for the built-in responsiveness. I know it's not perfect, but it helps, especially since more and more people are on their phones. 
 
 I chose jQuery because I have always been more comfortable with it. If you look in script.js, you will see I listed all functions first, then the events. This doesn't happen right away.  As I work on sections of I'm trying to build, I write all the code I want to make it work. Then I go back to review my code, to see what can be condense, what can be a function due to repeated use, and what doesn't make sense. I added comments to help explain what each line is doing, and what each function is and is doing.  
+
+I tried to organize my style.css by keeping style similar element closer together such as h1 and h3, font style and font weight of the text, and buttons for example. 
+
+I have implemented a way to validate the characters users are entering, making sure that it is numbers.  I did this to help the user enter in correct values and the correct length of those values. While the rules are listed, many times we get hooked in the game and forget the rules. I also check for no characters input not entering any characters and clicking submit, would not be allowed. 
+
+I chose a modal to provide feedback because the pop up will get the user's attention. 
+
+With testing of this game, it was informed that Your Guesses can be hard track of the correct guesses. I added in to make those text green so user can see the numbers with the feedback to stand out. 
+
+As I was playing the game, it was tough! So I add hints to help, but not too many hints to give away the answer.
+
+I thought to add an Reset in case any user no longer wanted to continue playing the current game and start a new one. It does show the answer to current game so the user isn't left in the unknown.
+
 
 ## How to Play: 
 * Go to this link: https://mhvue.github.io/mastermindGame/ 
