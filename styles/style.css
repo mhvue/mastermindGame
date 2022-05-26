@@ -51,6 +51,10 @@ img {
     display: none;
 }
 
+.example-text {
+    list-style-type: none;
+}
+
 .hint-header {
     color: #E1AD01;
 }

@@ -157,6 +157,7 @@ function appendHint(randomIndex) {
     messageModal(hintMsg, hintImg);
 
 }
+
 //reset to run randomNum, enabled submit btn, restart count, clear guesses
 $("#reset-btn").on("click", function() {
     //pop up msg to show the correct answer and offer to replay 
@@ -207,20 +208,16 @@ $("#hint-btn").click(function() {
    const randomIndex =  Math.floor((Math.random() * 3) + 0)
 
     hintClick--;
-
     $(".hint-num").text(" " + hintClick)
-       
    if(hintClick === 1){
        appendHint(randomIndex)
       $(".playAgainBtn").hide();
    }
-   
    //rule out the possibility of getting same random index 
    else if(hintClick === 0 && randomIndex.toString() !== hintArr[0]){
         appendHint(randomIndex)
         $("#hint-btn").prop("disabled", true);
         $(".playAgainBtn").hide();
-  
     }
    else if(hintClick === 0 && randomIndex.toString() === hintArr[0]){
        appendHint(randomIndex)
