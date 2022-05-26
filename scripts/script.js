@@ -11,9 +11,9 @@ let hintArr = "";
  * function randomNum
  * @returns generated numbers from api
  */
-function randomNum () {
+ function randomNum () {
    
-    const runNum =  $.ajax({
+    return  $.ajax({
         url: "https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new",
         method: "GET"
     }).then(function(response){
@@ -23,8 +23,7 @@ function randomNum () {
         
         if(response){
             $(".modal").modal("hide")
-        }
-        generatedNum.push(num);
+            generatedNum.push(num);
         newNum = generatedNum.join().split("");
         console.log(newNum)
     
@@ -32,12 +31,19 @@ function randomNum () {
         $("#reset-btn").text("Reset");
         $("#hint-btn").prop("disabled", false);
         $(".playAgainBtn").hide();
+        }
+        // generatedNum.push(num);
+        // newNum = generatedNum.join().split("");
+        // console.log(newNum)
+    
+        // //show reset button, hint button active and hite play again button on modal
+        // $("#reset-btn").text("Reset");
+        // $("#hint-btn").prop("disabled", false);
+        // $(".playAgainBtn").hide();
     });
-
-    return runNum;
 };
-randomNum();
 
+randomNum();
 /**
  * function to create custom messages as modal pops up
  * @param {string} message 
@@ -250,7 +256,7 @@ $("#submitBtn").click(function(event){
     //get the number from user and push into enteredNumArr 
     const userNum= $(".numHolder").val().trim();
     $(".playAgainBtn").prop("disabled",false);
-
+    console.log(userNum)
     //input of numbers that equal 0-7 and only 4 characters 
     if(userNum.match(checkRegEx) && userNum.length === 4){
         enteredNum.push(userNum);
@@ -273,7 +279,9 @@ $("#submitBtn").click(function(event){
 
         //exact match of entered numbers and its location to generated numbers
        if(splitUserNum[i] === newNum[i] ){ 
+           console.log(splitUserNum)
            checker.push(splitUserNum[i])
+           console.log(checker)
         }
 
         //user input the num(s) already verified as correct, but in combination with differ incorrect numbers  
@@ -295,8 +303,9 @@ $("#submitBtn").click(function(event){
 //messages to user
     //correct answers
     if(checker.length === 4) {
+        console.log("ehre", checker)
         const correctImg = $("<img src='./images/correctBtn.svg' alt= 'red box with white x' >");
-        const correctMsg = $("<h5> You got all the numbers corret. Play Again?</h5>");
+        const correctMsg = $("<h5> You got all the numbers correct. Play Again?</h5>");
         const winSound = new Audio("./other/win_bell.wav");
 
         //winning sound 
@@ -319,9 +328,11 @@ $("#submitBtn").click(function(event){
             $(this).prop("disabled", true)
         }); 
         enteredNum.length = 0;
+        checker.length = 0;
     }
     //incorrrect answers 
     else if(incorrectArr.length === 4){
+        console.log(incorrectArr)
         const incorrectVal = incorrectArr.join("");
         const tryAgainImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
         const tryAgainMsg = $("<span> No Match </span>").addClass("text-position");
