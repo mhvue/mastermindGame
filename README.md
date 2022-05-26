@@ -10,8 +10,8 @@ I added an option to contact me via email because my priorty is a great user exp
 ## Table of Contents
 * [My Thought Process and Structure of Code](#My-Thought-Process-and-Structure-of-Code)
     * [The Code](#the-code)
-    * [N My Thought Processs](#my-thought-process)
-* [How to Play: ](#how-to-play)
+    * [My Thought Processs](#my-thought-process)
+* [How to Play ](#how-to-play)
 * [How you can get started](#How-you-can-get-started)
 * [Extensions ](#Extensions)
 * [Technologies](#technologies)
