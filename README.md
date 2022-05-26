@@ -5,7 +5,19 @@ When I build something, I often put myself in the user's shoes and try to build 
 
 In this game, I wanted to keep users engaged. Even though this is user vs. computer, I wanted the computer to be helpful, without giving away the answer. This is why I implmeneted the extensions below. 
 
-I wanted to add an option to contact me via email because my priorty is great user experience. 
+I added an option to contact me via email because my priorty is a great user experience. 
+
+## Table of Contents
+* [My Thought Process and Structure of Code](#My-Thought-Process-and-Structure-of-Code)
+    * [The Code](#the-code)
+    * [N My Thought Processs](#my-thought-process)
+* [How to Play: ](#how-to-play)
+* [How you can get started](#How-you-can-get-started)
+* [Extensions ](#Extensions)
+* [Technologies](#technologies)
+
+
+
 
 ## My Thought Process and Structure of Code 
 ### The Code 
@@ -90,4 +102,9 @@ I added a Reset Button just in case a user no longer wanted to continue playing 
 * Attempts
     * Attempts is shown, which starts at 10 and goes down by 1 per incorrect answer.
 * Your Guesses have feedback in Green
-    * This is to help user find their previous attempts that is close to answer, to make next best guess.
+
+# Technologies 
+* HTML
+* CSS 
+* JavaScript(jQuery)
+* Bootsrap
