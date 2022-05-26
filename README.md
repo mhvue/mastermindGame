@@ -53,8 +53,8 @@ I added a Reset Button just in case a user no longer wanted to continue playing 
 * If you feel you need to start over with a new game, click on Reset Game
 
 ## How you can get started
-1. Clone this repository 
-<code><pre> https://github.com/mhvue/mastermindGame.git </code></pre>
+1. Clone this repository to your local machine
+<code><pre>https://github.com/mhvue/mastermindGame.git </code></pre>
 2. Open in your code editor the cloned repo. I am using Visual Studio Code (VSC).
 3. Right click in index.html and find _Open in Default Browser_ to open in your preferred default browser.
 4. It opens on local machine.
