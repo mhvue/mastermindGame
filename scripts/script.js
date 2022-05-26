@@ -202,7 +202,8 @@ $(".playAgainBtn").on("click", function() {
     });
     
     //modal shows Loading as randomNum is called to load new random numbers 
-    $(".messageContainer").text("Loading new game")
+    $(".messageContainer").text("Loading new game...")
+    $(".playAgainBtn").hide();
 
     //count back to 10 and empty Your Guesses
     $("#guess-num").text(count);
@@ -353,6 +354,7 @@ $("#submitBtn").click(function(event){
    }
    //correct numbers but incorrect position
     else if(checker.length <= 3 || containsNum === true){
+        console.log(checker)
         const almostVal = splitUserNum.join("");        
         closeToAnswer(almostVal);
 
