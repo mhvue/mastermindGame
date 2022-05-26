@@ -5,7 +5,7 @@ let containsNum= false;
 let count = 10;
 let score = 0;
 let hintClick = 2;
-let hintArr = "";
+let hintNums = "";
 
 /**
  * function randomNum
@@ -144,13 +144,13 @@ function appendHint(randomIndex) {
 
     const hintImg = $("<img src='./images/hint.jpg' alt= 'hint word on keyboard' >");
     let hintNum1 = newNum[randomIndex];
-    let hintNum2 = newNum[hintArr[0]];
+    let hintNum2 = newNum[hintNums[0]];
 
-    hintArr += randomIndex;
+    hintNums += randomIndex;
 
    $(".modal-title").removeClass("almost-title gameOver-title correct-title try-title").addClass("hint-title");
 
-    if(hintArr.length === 1){
+    if(hintNums.length === 1){
         hintMsg = $("<h5>").html(`Hint: It contains ${newNum[randomIndex]}`)
     }
     else if(hintNum1 !== hintNum2){
@@ -248,13 +248,13 @@ $("#hint-btn").click(function() {
       $(".playAgainBtn").hide();
    }
    //trying to rule out the possibility of getting same random index twice
-   else if(hintClick === 0 && randomIndex.toString() !== hintArr[0]){
+   else if(hintClick === 0 && randomIndex.toString() !== hintNums[0]){
         appendHint(randomIndex)
         $("#hint-btn").prop("disabled", true);
         $(".playAgainBtn").hide();
     }
     //this is what to do in case we do get the same randomeNum twice 
-   else if(hintClick === 0 && randomIndex.toString() === hintArr[0]){
+   else if(hintClick === 0 && randomIndex.toString() === hintNums[0]){
        appendHint(randomIndex)
         $("#hint-btn").prop("disabled", true);
         $(".playAgainBtn").hide();
