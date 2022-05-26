@@ -1,5 +1,5 @@
 # Mastermind Game
-Hello! Welcome to my version of Mastermind. Haven't played Mastermind before? Here's a [link] (https://en.wikipedia.org/wiki/Mastermind_(board_game)) to explain the game. My version involves guessing combination of 4 numbers. 
+Hello! Welcome to my version of Mastermind. Haven't played Mastermind before? Here's a [link](https://en.wikipedia.org/wiki/Mastermind_(board_game)) to explain the game. My version involves guessing combination of 4 numbers. 
 
 When I build something, I often put myself in the user's shoes and try to build something that is easy to use. I am only one person and the next person who plays with what I build, may not agree with me. Often, I have friends or family test what I build for feedback so I can improve.
 
