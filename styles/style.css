@@ -9,9 +9,7 @@ body {
 }
 
 .container {
-    margin-top: 5%;
     padding: 5%;
-
 }
 
 .infoContainer{
@@ -85,7 +83,7 @@ img {
 
 .remaining-info, .hint-text{
     margin-top: 1em;
-    color: white;
+    color: #fff;
 }
 
 .history {
@@ -126,7 +124,7 @@ img {
     color: #fff;
 }
 
-.playAgainBtn, .resetHint {
+.playAgainBtn{
     margin: 1em 1em;
 }
 

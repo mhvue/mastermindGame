@@ -1,5 +1,5 @@
 # Mastermind Game
-Hello! Welcome to my version of Mastermind. Haven't played Mastermind before? Here's a https://en.wikipedia.org/wiki/Mastermind_(board_game) to explain the game. My version involves guessing combination of 4 numbers. 
+Hello! Welcome to my version of Mastermind. Haven't played Mastermind before? Here's a [link] (https://en.wikipedia.org/wiki/Mastermind_(board_game)) to explain the game. My version involves guessing combination of 4 numbers. 
 
 When I build something, I often put myself in the user's shoes and try to build something that is easy to use. I am only one person and the next person who plays with what I build, may not agree with me. Often, I have friends or family test what I build for feedback so I can improve.
 
@@ -8,38 +8,42 @@ In this game, I wanted to keep users engaged. Even though this is user vs. compu
 I wanted to add an option to contact me via email for questions or feedback on game as I always welcome feedback.
 
 ## My Thought Process and Structure of Code 
+### The Code 
 You will see in this codebase, I used Bootstrap. I like Bootstrap for their Grid system and rows and columns. I also like Bootstrap for the built-in responsiveness. I know it's not perfect, but it helps, especially since more and more people are on their phones. 
 
-I chose jQuery because I have always been more comfortable with it. If you look in script.js, you will see I listed all functions first, then the events. This doesn't happen right away.  As I work on sections of I'm trying to build, I write all the code I want to make it work. Then I go back to review my code, to see what can be condense, what can be a function due to repeated use, and what doesn't make sense. I added comments to help explain what each line is doing, and what each function is and is doing.  
+I chose jQuery because I have always been more comfortable with it. If you look in [script.js](https://github.com/mhvue/mastermindGame/blob/main/scripts/script.js), you will see I listed all functions first, then the events, but this doesn't happen right away. As I work on sections of waht I'm trying to build, I write all the code I want to make it work. I'm a visual learner so I often have it open up another screen to test what I write. Once it works the way I intend it to, then I go back to review the code. I check for what can be condense, what can be a function due to repeated use, and what doesn't make sense. I added comments to help explain what each line is doing, and what each function is and waht it is doing.  
 
-I tried to organize my style.css by keeping style similar element closer together such as h1 and h3, font style and font weight of the text, and buttons for example. 
+I tried to organize my [style.css](https://github.com/mhvue/mastermindGame/blob/main/styles/style.css) by keeping similar elements closer together. For examaple, I try to keep all h1 and h3 togther and anything font related together.  
 
-I have implemented a way to validate the characters users are entering, making sure that it is numbers.  I did this to help the user enter in correct values and the correct length of those values. While the rules are listed, many times we get hooked in the game and forget the rules. I also check for no characters input not entering any characters and clicking submit, would not be allowed. 
+### My Thought Processes
+The UI design of this may not be the prettiest, but I focus more on making the game work. I added images were I felt it could help spice up the game. For example, I added them in the modal for incorrect and correct guesses. I wanted to have some color correlation. So Hint I stick to a dark mustard color, green is for anything good like getting closer to correct answer in Your Guesses, and red for warning such as when number reach 5 and is counting down to 0.
+
+I have implemented a way to validate the characters enterd by users, making sure that it is numbers. In my code, it is a string of numbers. I did this to help the user enter in correct values and the correct length of those values. While the rules are listed, many times we get hooked in the game and forget the rules. I also check just in case no characters are  entered so submitting a blank (with no numbers) would not be allowed.
 
 I chose a modal to provide feedback because the pop up will get the user's attention. 
 
-With testing of this game, it was informed that Your Guesses can be hard track of the correct guesses. I added in to make those text green so user can see the numbers with the feedback to stand out. 
+With testing of this game, it was informed that Your Guesses can be hard to keep track of, specifically the guesses with positive feedback (meaning getting closer to answer). I added in font color of green so user can those stand out, to help them make the next guess. 
 
-As I was playing the game, it was tough! So I add hints to help, but not too many hints to give away the answer.
+As I was playing the game, it was tough! So I added hints to help. I only added a couple of hints to keep game challenging. 
 
-I thought to add an Reset in case any user no longer wanted to continue playing the current game and start a new one. It does show the answer to current game so the user isn't left in the unknown.
+I added a Reset just in case a user no longer wanted to continue playing the current game and start a new one. It does show the answer to current game so the user isn't left in the unknown.
 
 
 ## How to Play: 
 * Go to this link: https://mhvue.github.io/mastermindGame/ 
 * You need to get 4 numbers between 0-7
-* Your guess of numbers, needs to be in the correct placement of numbers, too. 
+* Your guess of numbers, needs to be in the correct placement of numbers. 
 * You will be provided feedback about your guess (rather it's incorrect, correct, or contains correct numbers and/or placements of those numbers)
 * You can view your prevous guesses with the feedback under Your Guesses 
 * You have 10 attempts 
-* You can use Hint 
+* You hve 2 Hints 
 * If you feel you need to start over with a new game, click on Reset Game
 
 ## How you can get started
-1. Clone this repository<code><pre> https://github.com/mhvue/mastermindGame.git </code></pre>
-2. Open in your code editor the cloned repo (I am using Visual Studio Code (VSC) )
-3. Right click in index.html and find _Open in Default Browser_ or if on Windows, press ALT + B
-4. It opens with your local machine.
+1. Clone this repository <code><pre> https://github.com/mhvue/mastermindGame.git </code></pre>
+2. Open in your code editor the cloned repo. I am using Visual Studio Code (VSC).
+3. Right click in index.html and find _Open in Default Browser_ to open in your preferred default browser.
+4. It opens on local machine.
 5. You are all set! Add and change what you will about your version of Mastermind from this.  
 
 

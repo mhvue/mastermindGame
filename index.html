@@ -27,8 +27,7 @@
             <div class="col"><h1>Mastermind Game</h1></div>
             <h3 class="score text-center">Score: <span class="scoreBoard">0</span></h3>
        </div>
-   
-        <!--this row splits in half, 1 containing info, the 2nd the guesses and feedback-->
+       
         <div class="row info">
             <div class="col infoContainer borderBottom">
                 <!--intro-->
@@ -52,6 +51,7 @@
                          click <a href="https://en.wikipedia.org/wiki/Mastermind_(board_game)" target="_blank">here</a></li>
                 </ul>
             </div>
+            <!--guesses with feedback will go here-->
             <div class="col guessesContainer borderBottom">
                 <div class="history">
                     <h3>Your Guesses:</h3> 
@@ -69,12 +69,10 @@
                     <h3 class=" hint-header text-center">Hint:<span class="hint-num"> 2</span></h3>
                     <h3 class="hint-text">Need a Hint? Hit the Hint button</h3>
                 <!-- form to input numbers -->
-                <!-- help from stackOverflow on making sure form doesn't refresh after hitting enter-->
-                    <!-- <form action="javascript:void(0);">  -->
-                        <form>
+                    <form>
                         <input class="numHolder" type="text" id="target" placeholder="number here">
+                        <button type="submit" class="btn" id="submitBtn">Submit</button>
                     </form>
-                    <button type="button" class="btn" id="submitBtn">Submit</button>
                     <!---buttons-->
                     <div class="button-container"> 
                         <button type="button" class="btn btn-success" id="reset-btn">Reset</button>

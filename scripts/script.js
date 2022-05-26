@@ -240,8 +240,8 @@ $("#hint-btn").click(function() {
 });
 
 //user presses submit button 
-$("#submitBtn").click(function(){
- 
+$("#submitBtn").click(function(event){
+    event.preventDefault();
     let incorrectArr = []; 
     let splitUserNum;
     const checkRegEx = /^[0-7]+$/; //with the help from stackOverflow
