@@ -32,14 +32,7 @@ let hintArr = "";
         $("#hint-btn").prop("disabled", false);
         $(".playAgainBtn").hide();
         }
-        // generatedNum.push(num);
-        // newNum = generatedNum.join().split("");
-        // console.log(newNum)
-    
-        // //show reset button, hint button active and hite play again button on modal
-        // $("#reset-btn").text("Reset");
-        // $("#hint-btn").prop("disabled", false);
-        // $(".playAgainBtn").hide();
+      
     });
 };
 
@@ -87,7 +80,7 @@ function countDown() {
             $("#submitBtn, #hint-btn").each(function() {
                 $(this).prop("disabled", true)
             });
-            $("#reset-btn").text("Play Again")
+            $("#reset-btn").text("Play Again");
             $("#guess-num").css("color", "#fff");
             score = 0
             break;
@@ -171,6 +164,26 @@ function appendHint(randomIndex) {
 
 //reset to run randomNum, enabled submit btn, restart count, clear guesses
 $("#reset-btn").on("click", function() {
+
+    if($(this).attr("data-win")){
+        console.log("hereeeeee")
+        $(".modal-title").removeClass("try-title almost-title correct-title hint-title").addClass("gameOver-title")
+        randomNum();
+        console.log('start again')
+        messageModal("Loading");
+        $(".playAgainBtn").hide()
+        //start count at 10 again 
+        count = 10;
+
+        //disable submit button and hint button,  show count restarted, and clear history 
+        $("#submitBtn, #hint-btn").each(function() {
+            $(this).prop("disabled", true)
+        });
+        $("#guess-num").text(count);
+        $(".historyHolder").html("");
+
+    }else {
+    console.log("not here")
     //pop up msg to show the correct answer and offer to replay 
     $(".modal-title").removeClass("try-title almost-title correct-title hint-title").addClass("gameOver-title");
     messageModal(`The answer was ${newNum.join("")} Hit Play Again button to play again`);
@@ -185,16 +198,19 @@ $("#reset-btn").on("click", function() {
     });
     $("#guess-num").text(count);
     $(".historyHolder").html("");
+}
 });
 
 //play again button on modal 
 $(".playAgainBtn").on("click", function() {
     
+
     //start generated random number again by calling api
      randomNum()
    
     //start count at 10 again 
     count = 10;
+    hintClick  = 2;
 
     //enable submit button, show count restarted, and clear history 
     $("#submitBtn, #hint-btn").each(function() {
@@ -208,6 +224,7 @@ $(".playAgainBtn").on("click", function() {
     //count back to 10 and empty Your Guesses
     $("#guess-num").text(count);
     $(".historyHolder").html("");
+    $(".hint-num").text(hintClick);
     
 });
 
@@ -322,6 +339,8 @@ $("#submitBtn").click(function(event){
 
         //option to play again 
         $(".playAgainBtn").show();
+        $("#reset-btn").text("Play Again").attr("data-win", "win-game")
+
 
         //disable submit btn and hint btn as game is over. clear array containing what user input to play again
         $("#reset-btn").text("Play Again");
