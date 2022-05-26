@@ -5,18 +5,19 @@ When I build something, I often put myself in the user's shoes and try to build 
 
 In this game, I wanted to keep users engaged. Even though this is user vs. computer, I wanted the computer to be helpful, without giving away the answer. This is why I implmeneted the extensions below. 
 
-I wanted to add an option to contact me via email for questions or feedback on game as I always welcome feedback.
+I wanted to add an option to contact me via email because my priorty is great user experience. 
 
 ## My Thought Process and Structure of Code 
 ### The Code 
 You will see in this codebase, I used Bootstrap. I like Bootstrap for their Grid system and rows and columns. I also like Bootstrap for the built-in responsiveness. I know it's not perfect, but it helps, especially since more and more people are on their phones. 
 
-I chose jQuery because I have always been more comfortable with it. If you look in [script.js](https://github.com/mhvue/mastermindGame/blob/main/scripts/script.js), you will see I listed all functions first, then the events, but this doesn't happen right away. As I work on sections of waht I'm trying to build, I write all the code I want to make it work. I'm a visual learner so I often have it open up another screen to test what I write. Once it works the way I intend it to, then I go back to review the code. I check for what can be condense, what can be a function due to repeated use, and what doesn't make sense. I added comments to help explain what each line is doing, and what each function is and waht it is doing.  
+I chose jQuery because I have always been more comfortable with it. If you look in [script.js](https://github.com/mhvue/mastermindGame/blob/main/scripts/script.js), you will see I listed all functions first, then the events, but this doesn't happen right away. As I work on sections of waht I'm trying to build, I write all the code I want to make it work. I'm a visual learner so I often have it open up another screen to test what I write. Once it works the way I intend it to, then I go back to review the code. I check for what can be condense, what can be a function due to repeated use, and what doesn't make sense. I added comments to help explain what each line is doing, and what each function is and what it is doing. I like adding comments because I think it's a great way to communicate what the code is doing to a team or someone who is looking at my code for the first time. 
+ 
 
 I tried to organize my [style.css](https://github.com/mhvue/mastermindGame/blob/main/styles/style.css) by keeping similar elements closer together. For examaple, I try to keep all h1 and h3 togther and anything font related together.  
 
-### My Thought Processes
-The UI design of this may not be the prettiest, but I focus more on making the game work. I added images were I felt it could help spice up the game. For example, I added them in the modal for incorrect and correct guesses. I wanted to have some color correlation. So Hint I stick to a dark mustard color, green is for anything good like getting closer to correct answer in Your Guesses, and red for warning such as when number reach 5 and is counting down to 0.
+### My Thought Process
+The UI design of this may not be the prettiest, but I focus more on making the game work for the user experience. For example, I added them in the modal for incorrect and correct guesses. I wanted to have some color correlation. For the HINT button I chose a Dark Mustard Color, Green was used for anything good like getting closer to the correct answer in Your Guesses, and Red as a Warning for when the number reached 5 and is counting down to 0.
 
 I have implemented a way to validate the characters enterd by users, making sure that it is numbers. In my code, it is a string of numbers. I did this to help the user enter in correct values and the correct length of those values. While the rules are listed, many times we get hooked in the game and forget the rules. I also check just in case no characters are  entered so submitting a blank (with no numbers) would not be allowed.
 
@@ -24,9 +25,9 @@ I chose a modal to provide feedback because the pop up will get the user's atten
 
 With testing of this game, it was informed that Your Guesses can be hard to keep track of, specifically the guesses with positive feedback (meaning getting closer to answer). I added in font color of green so user can those stand out, to help them make the next guess. 
 
-As I was playing the game, it was tough! So I added hints to help. I only added a couple of hints to keep game challenging. 
+Playing this game was difficult! Even as the devoloper. Through a 3rd party play-test we decided that 2 hints was the best for the user experience.
 
-I added a Reset just in case a user no longer wanted to continue playing the current game and start a new one. It does show the answer to current game so the user isn't left in the unknown.
+I added a Reset Button just in case a user no longer wanted to continue playing the current game and start a new one. It does show the answer to reseted game so the user could see how close they were. 
 
 
 ## How to Play: 

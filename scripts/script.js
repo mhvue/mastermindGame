@@ -154,9 +154,9 @@ function appendHint(randomIndex) {
         hintMsg = $("<h5>").html(`Hint: It contains ${newNum[randomIndex]}`)
     }
     else if(hintNum1 !== hintNum2){
-        hintMsg = $("<h5>").html(`Second Hint: It contains ${newNum[randomIndex]}`)
+        hintMsg = $("<h5>").html(`Hint: It contains ${newNum[randomIndex]}`)
     } else {
-        hintMsg = $("<h5>").html(`Second Hint: It contains duplicates`)
+        hintMsg = $("<h5>").html(`Hint: It contains duplicates`)
     }
 
     messageModal(hintMsg, hintImg);
@@ -170,17 +170,19 @@ $("#reset-btn").on("click", function() {
         $(".modal-title").removeClass("try-title almost-title correct-title hint-title").addClass("gameOver-title")
         randomNum();
         console.log('start again')
-        messageModal("Loading");
+        messageModal("Loading...");
         $(".playAgainBtn").hide()
         //start count at 10 again 
         count = 10;
+        hintClick = 2;
 
         //disable submit button and hint button,  show count restarted, and clear history 
         $("#submitBtn, #hint-btn").each(function() {
-            $(this).prop("disabled", true)
+            $(this).prop("disabled", false)
         });
         $("#guess-num").text(count);
-        $(".historyHolder").html("");
+        $(".historyHolder").html(""); 
+        $(".hint-num").text(hintClick);
 
     }else {
     console.log("not here")
@@ -191,6 +193,7 @@ $("#reset-btn").on("click", function() {
 
     //start count at 10 again 
     count = 10;
+    hintClick = 2;
 
     //disable submit button and hint button,  show count restarted, and clear history 
     $("#submitBtn, #hint-btn").each(function() {
