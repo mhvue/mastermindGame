@@ -32,8 +32,6 @@ function randomNum () {
         $("#reset-btn").text("Reset");
         $("#hint-btn").prop("disabled", false);
         $(".playAgainBtn").hide();
-        
-       
     });
 
     return runNum;
@@ -59,9 +57,9 @@ function messageModal (message, image){
 }
 
 /**
- * function for when the count goes down
+ * function countDown is for when count goes down
  * when count reaches 0, game is over. modals pops up informing of so.
- * eveyrone resets (score, feedback gone, count)
+ * everything resets (score, feedback gone, count, hint)
  *  button to play again shows up.
  */
 function countDown() {
@@ -94,8 +92,8 @@ function countDown() {
 
 
 /**
- * function appendInfo appends history of feedback and previous guesses 
- * @param {string of number} n 
+ * function appendInfo is be able to show on UI the history of feedback and previous guesses to user
+ * @param {string} n 
  * @param {string} feedback 
  */
  function appendInfo (n, feedback){
@@ -104,7 +102,10 @@ function countDown() {
     checker = [];
 }
 
-
+/**
+ * function closeToAnswer contains feedback about user's guesses (to show if correct or not)
+ * @param {number} value 
+ */
 function closeToAnswer (value) {
     const almostImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
    
@@ -135,6 +136,11 @@ function closeToAnswer (value) {
 
 }
 
+/**
+ * function appendHint will show the hints 
+ * @param {number} randomIndex 
+ */
+
 function appendHint(randomIndex) {
 
     const hintImg = $("<img src='./images/hint.jpg' alt= 'hint word on keyboard' >");
@@ -155,8 +161,7 @@ function appendHint(randomIndex) {
     }
 
     messageModal(hintMsg, hintImg);
-
-}
+};
 
 //reset to run randomNum, enabled submit btn, restart count, clear guesses
 $("#reset-btn").on("click", function() {
@@ -182,7 +187,6 @@ $(".playAgainBtn").on("click", function() {
     //start generated random number again by calling api
      randomNum()
    
-
     //start count at 10 again 
     count = 10;
 
@@ -191,7 +195,10 @@ $(".playAgainBtn").on("click", function() {
         $(this).prop("disabled", false)
     });
     
+    //modal shows Loading as randomNum is called to load new random numbers 
     $(".messageContainer").text("Loading new game")
+
+    //count back to 10 and empty Your Guesses
     $("#guess-num").text(count);
     $(".historyHolder").html("");
     
@@ -207,18 +214,23 @@ $("#hint-btn").click(function() {
     //show a number randomly btwn 0-3 based on index but not location, to show value to user
    const randomIndex =  Math.floor((Math.random() * 3) + 0)
 
+   //track how many times hint button it clicked 
     hintClick--;
+
+    //update hint count on UI
     $(".hint-num").text(" " + hintClick)
+
    if(hintClick === 1){
        appendHint(randomIndex)
       $(".playAgainBtn").hide();
    }
-   //rule out the possibility of getting same random index 
+   //trying to rule out the possibility of getting same random index twice
    else if(hintClick === 0 && randomIndex.toString() !== hintArr[0]){
         appendHint(randomIndex)
         $("#hint-btn").prop("disabled", true);
         $(".playAgainBtn").hide();
     }
+    //this is what to do in case we do get the same randomeNum twice 
    else if(hintClick === 0 && randomIndex.toString() === hintArr[0]){
        appendHint(randomIndex)
         $("#hint-btn").prop("disabled", true);
@@ -226,8 +238,6 @@ $("#hint-btn").click(function() {
     }
 
 });
-
-
 
 //user presses submit button 
 $("#submitBtn").click(function(){
@@ -261,12 +271,13 @@ $("#submitBtn").click(function(){
   //compared enteredNum values to genreatedNum values. 
     for(let i = 0; i < splitUserNum.length; i++){     
 
-        //if number entered by user (now splitUserNum) equals elements in generatedNum (now as newNum) value and loc
+        //exact match of entered numbers and its location to generated numbers
        if(splitUserNum[i] === newNum[i] ){ 
            checker.push(splitUserNum[i])
         }
 
-        //user input the num(s) already verified as correct, but in combination with differ incorrect numbers
+        //user input the num(s) already verified as correct, but in combination with differ incorrect numbers  
+        //and the placement is incorrect
         else if(splitUserNum.includes(newNum[i])){
            containsNum = true;
         }
@@ -298,18 +309,18 @@ $("#submitBtn").click(function(){
         //get msg to pop up first then append user's guessed number with feedback
         $(".modal-title").removeClass("almost-title gameOver-title hint-title try-title").addClass("correct-title");
         messageModal(correctMsg, correctImg);
+
+        //option to play again 
         $(".playAgainBtn").show();
 
         //disable submit btn and hint btn as game is over. clear array containing what user input to play again
         $("#reset-btn").text("Play Again");
         $("#submitBtn, #hint-btn").each(function() {
             $(this).prop("disabled", true)
-        });
-
-        //empty array containing numbers that were entered by user 
+        }); 
         enteredNum.length = 0;
     }
-    //incorrrect answers
+    //incorrrect answers 
     else if(incorrectArr.length === 4){
         const incorrectVal = incorrectArr.join("");
         const tryAgainImg = $("<img src='./images/xBtn.svg' alt= 'red box with white x' >");
@@ -337,6 +348,5 @@ $("#submitBtn").click(function(){
         //reset arrays and keep counting down;
         enteredNum.length = 0;
         countDown();
-    
    }
 });

@@ -68,8 +68,8 @@ I chose jQuery because I have always been more comfortable with it. If you look 
     * X image for incorrect answers (no correct numbers) and answer with some correct numbers but wrong placement. 
     * Thumbs up image for correct answer. 
 * Score
-    * Score is shown, which starts at 0 and goes up by 1 point per correct answer 
+    * Score is shown, which starts at 0 and goes up by 1 per correct answer 
 * Attempts
-    * Attempts is shown, which starts at 10 and goes down by 1 point per incorrect answer 
+    * Attempts is shown, which starts at 10 and goes down by 1 per incorrect answer 
 * The attempted numbers that are close to answer with the feedback will be in green
     * This is to help user find their previous attempts to make next best guess
